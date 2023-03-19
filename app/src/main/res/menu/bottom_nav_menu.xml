@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_baseline_home_"
+        android:title="@string/title_home" />
 
+    <item
+        android:id="@+id/navigation_course"
+        android:icon="@drawable/ic_baseline_course"
+        android:title="@string/title_course" />
+
+    <item
+        android:id="@+id/navigation_task"
+        android:icon="@drawable/ic_baseline_task"
+        android:title="@string/title_task" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_baseline_profile"
+        android:title="@string/title_profile" />
 </menu>

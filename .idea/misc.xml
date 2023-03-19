@@ -12,9 +12,15 @@
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_landing.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_onboarding.xml" value="0.22" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_splahscreen.xml" value="0.22" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_course.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_home.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_profile.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_task.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/onboarding_page_item.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/onboarding_view.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/xml/activity_onboarding_scene.xml" value="0.17074275362318841" />
       </map>

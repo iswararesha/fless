@@ -17,6 +17,25 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="name">Nama</string>
+    <string name="landingTextDescription">Please select one option of authentication below.
+        We are happy to fless together with you</string>
 
-    <string name="landingTextDescription">Please select one option of authentication below. We are happy to fless together with you</string>
+    /Onboarding Title and Description
+    <string name="onboardingTittle1">Learn Annywhere and Anytime</string>
+    <string name="onboardingDescription1">"With Fless, you can access your learning material and task anywhere and anytime. But don't forget the internet connection!"</string>
+    <string name="onboardingTittle2">Enjoy the Material and Video</string>
+    <string name="onboardingDescription2">Enjoy our self-directed learning designed learning material with video to support your understanding.</string>
+    <string name="onboardingTittle3">Personalization For Your Need</string>
+    <string name="onboardingDescription3">Use our personalization feature to make your study more comfortable.</string>
+    <string name="onboardingTittle4">Fless Now</string>
+    <string name="onboardingDescription4">Welcome, we are happy to Fless with you!</string>
+
+    //Navigation
+    <string name="title_home">Home</string>
+    <string name="title_course">Course</string>
+    <string name="title_task">Task</string>
+    <string name="title_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

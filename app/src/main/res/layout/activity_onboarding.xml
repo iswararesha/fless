@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_onboarding_scene"
-    tools:context=".ui.onboarding.OnboardingActivity">
+    tools:context=".ui.onboarding.OnboardingActivity"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/logoMenu1"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:src="@drawable/ic_icon_logo"
+        android:src="@drawable/ic_onboarding_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="parent" />
 
@@ -20,8 +21,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/onboarding_title_test"
-        android:textColor="@color/black"
+        android:text="@string/onboardingTittle1"
+        android:textColor="@color/firstBlue"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu1"
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:text="@string/onboarding_desceription_test"
+        android:text="@string/onboardingDescription2"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu1"
@@ -45,7 +46,7 @@
         android:id="@+id/logoMenu2"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ic_onboarding_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="parent" />
 
@@ -54,8 +55,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/onboarding_title_test"
-        android:textColor="@color/black"
+        android:text="@string/onboardingTittle2"
+        android:textColor="@color/firstBlue"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu2"
@@ -68,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:text="@string/onboarding_desceription_test"
+        android:text="@string/onboardingDescription2"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu2"
@@ -79,7 +80,7 @@
         android:id="@+id/logoMenu3"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ic_onboarding_3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="parent" />
 
@@ -88,8 +89,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/onboarding_title_test"
-        android:textColor="@color/black"
+        android:text="@string/onboardingTittle3"
+        android:textColor="@color/firstBlue"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu3"
@@ -102,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:text="@string/onboarding_desceription_test"
+        android:text="@string/onboardingDescription3"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu3"
@@ -113,7 +114,7 @@
         android:id="@+id/logoMenu4"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ic_onboarding_4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="parent" />
 
@@ -122,8 +123,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/onboarding_title_test"
-        android:textColor="@color/black"
+        android:text="@string/onboardingTittle4"
+        android:textColor="@color/firstBlue"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu4"
@@ -136,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:text="@string/onboarding_title_test"
+        android:text="@string/onboardingDescription4"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu4"
@@ -157,7 +158,7 @@
         android:id="@+id/menu1"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="150dp"
         app:altSrc="@drawable/ic_baseline_circle_active"
         app:layout_constraintEnd_toStartOf="@+id/menu2"
         app:layout_constraintHorizontal_bias="0.5"
@@ -195,7 +196,7 @@
         android:id="@+id/menu4"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="150dp"
         app:altSrc="@drawable/ic_baseline_circle_active"
         app:layout_constraintBottom_toBottomOf="@+id/menu3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -212,6 +213,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_text_logo" />
+        app:srcCompat="@drawable/ic_text_logo"
+        app:tint="@color/firstBlue" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
