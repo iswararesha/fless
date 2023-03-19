@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "834019612243",
+    "project_id": "fless-570f7",
+    "storage_bucket": "fless-570f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834019612243:android:0bd038aaf38f3584bb98a6",
+        "android_client_info": {
+          "package_name": "com.resha.fless"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834019612243-8605k3icb00od6llgaq87ujde4pgc48n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.resha.fless",
+            "certificate_hash": "10a2e26951445e4242d0fa6cfcc0c6e102e535cc"
+          }
+        },
+        {
+          "client_id": "834019612243-vmq2o79jksmf7ubql426eb48lu24llem.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv3M514O9pmnVEgHktlDlXwttppRn-MWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834019612243-vmq2o79jksmf7ubql426eb48lu24llem.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

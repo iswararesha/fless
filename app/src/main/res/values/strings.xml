@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Fless</string>
+    <string name="onboarding_title_test">Test Title</string>
+    <string name="onboarding_desceription_test">Test Description</string>
+    <string name="start_now">Mulai</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="landingText">Lets Get Started!</string>
+    <string name="haveAccount">Already have an account?</string>
+
+    //Register and Login
+    <string name="helloAgain">Hello Again!</string>
+    <string name="welcomeLogin">Welcome back!</string>
+    <string name="descriptionWelcome">"You've been missed"</string>
+    <string name="registerInstruction">Please fill this form to continue</string>
+    <string name="createAccount">Create Your Account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="name">Nama</string>
+
+    <string name="landingTextDescription">Please select one option of authentication below. We are happy to fless together with you</string>
+</resources>
