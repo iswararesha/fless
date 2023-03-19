@@ -7,6 +7,8 @@
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/drawable/ic_asset_landing_page.xml" value="0.1955" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/drawable/ic_baseline_circle.xml" value="0.1945" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/drawable/ic_baseline_circle_active.xml" value="0.1945" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/drawable/ic_fless_launcher_background.xml" value="0.1955" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/drawable/ic_fless_launcher_foreground.xml" value="0.1955" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/drawable/ic_icon_logo.xml" value="0.1955" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1945" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_landing.xml" value="0.25" />
@@ -17,7 +19,7 @@
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_splahscreen.xml" value="0.22" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_course.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_home.xml" value="0.17255434782608695" />
-        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_profile.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_task.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/onboarding_page_item.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/onboarding_view.xml" value="0.17255434782608695" />

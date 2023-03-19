@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -25,6 +28,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupViewModel()
+        setupView()
+        setupActions()
     }
 
     private fun setupViewModel() {
@@ -32,8 +37,28 @@ class LoginActivity : AppCompatActivity() {
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[LoginViewModel::class.java]
 
-        setupView()
-        setupActions()
+        loginViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
+        loginViewModel.errorMessage.observe(this) { message ->
+            Toast.makeText(this@LoginActivity, message.toString(), Toast.LENGTH_SHORT).show()
+        }
+
+        loginViewModel.isSuccess.observe(this) {
+            if (it) {
+                Toast.makeText(this, "Selamat anda berhasil login", Toast.LENGTH_SHORT)
+            }
+        }
+
+        loginViewModel.getUser().observe(this) { user ->
+            if (user.isLogin) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     private fun setupActions() {
@@ -44,15 +69,50 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            loginViewModel.login("email@email.com", "Nama Saya", "123")
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
+            actionRegister()
         }
     }
 
     private fun setupView() {
         supportActionBar?.hide()
+    }
+
+    private fun actionRegister() {
+        val email = binding.editEmail
+        val password = binding.editPassword
+
+        if(checkValidation(email, password)){
+            loginViewModel.login(
+                email.text.toString(),
+                password.text.toString()
+            )
+        }
+    }
+
+    private fun checkValidation(email: EditText, password: EditText): Boolean {
+        val isEmailError : Boolean = email.length() == 0
+        val isPasswordError : Boolean = password.length() == 0
+
+        if(isEmailError || isPasswordError){
+            if(isEmailError){
+                email.error = "Email harus diisi"
+            }
+
+            if(isPasswordError){
+                password.error = "Password harus diisi"
+            }
+
+            return false
+        }
+
+        return true
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if(isLoading){
+            binding.loading.visibility = View.VISIBLE
+        }else{
+            binding.loading.visibility = View.GONE
+        }
     }
 }

@@ -1,60 +1,66 @@
 package com.resha.fless.ui.profile
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.resha.fless.R
+import com.resha.fless.databinding.FragmentProfileBinding
+import com.resha.fless.model.UserPreference
+import com.resha.fless.ui.ViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+private val Context.dataStore by preferencesDataStore("user")
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentProfileBinding? = null
+    private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var dataStore : DataStore<Preferences>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        dataStore = requireContext().dataStore
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+
+        setupViewModel()
+        setupActions()
+
+        return root
+    }
+
+    private fun setupActions() {
+        binding.btnLogout.setOnClickListener {
+            profileViewModel.logout()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    private fun setupViewModel() {
+        profileViewModel = ViewModelProvider(this,
+            ViewModelFactory(UserPreference.getInstance(dataStore))
+        )[ProfileViewModel::class.java]
+
+        profileViewModel.getUser()
+
+        profileViewModel.userDetail.observe(viewLifecycleOwner) {
+            binding.tvNameUser.text = it?.name
+            binding.tvEmailUser.text = it?.email
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

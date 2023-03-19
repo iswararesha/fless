@@ -15,14 +15,13 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
                 preferences[USER_ID_KEY] ?:"",
                 preferences[EMAIL_KEY] ?:"",
                 preferences[NAME_KEY] ?:"",
-                preferences[TOKEN_KEY] ?:"",
                 preferences[STATE_KEY] ?: false
             )
         }
     }
 
-    fun getToken() = dataStore.data.map{ preferences ->
-        preferences[TOKEN_KEY]
+    fun getUserId() = dataStore.data.map{ preferences ->
+        preferences[USER_ID_KEY]
     }
 
     suspend fun login(user: UserModel) {
@@ -30,7 +29,6 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             preferences[USER_ID_KEY] = user.userId
             preferences[EMAIL_KEY] = user.email
             preferences[NAME_KEY] = user.name
-            preferences[TOKEN_KEY] = user.token
             preferences[STATE_KEY] = user.isLogin
         }
     }
@@ -40,7 +38,6 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             preferences[USER_ID_KEY] = ""
             preferences[EMAIL_KEY] = ""
             preferences[NAME_KEY] = ""
-            preferences[TOKEN_KEY] = ""
             preferences[STATE_KEY] = false
         }
     }
@@ -52,7 +49,6 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val USER_ID_KEY = stringPreferencesKey("userId")
         private val EMAIL_KEY = stringPreferencesKey("email")
         private val NAME_KEY = stringPreferencesKey("name")
-        private val TOKEN_KEY = stringPreferencesKey("token")
         private val STATE_KEY = booleanPreferencesKey("state")
 
         fun getInstance(dataStore: DataStore<androidx.datastore.preferences.core.Preferences>): UserPreference {
