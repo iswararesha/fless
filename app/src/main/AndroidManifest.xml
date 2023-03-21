@@ -16,6 +16,12 @@
         android:theme="@style/Theme.Fless"
         tools:targetApi="31">
         <activity
+            android:name=".ui.material.MaterialActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.course.CourseDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity

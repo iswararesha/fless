@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:padding="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    card_view:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp">
+
+        <TextView
+            android:id="@+id/tvModulName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
+            android:text="@string/courseName"
+            android:textColor="@color/firstBlue"
+            android:textStyle="bold"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvModulDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/courseDescription"
+            card_view:layout_constraintEnd_toEndOf="@+id/tvModulName"
+            card_view:layout_constraintStart_toStartOf="@+id/tvModulName"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvModulName" />
+
+        <TextView
+            android:id="@+id/tvHourNeed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/hourNeed"
+            card_view:layout_constraintEnd_toEndOf="@+id/tvModulDescription"
+            card_view:layout_constraintStart_toStartOf="@+id/tvModulDescription"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvModulDescription" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSubModul"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="@+id/tvHourNeed"
+            card_view:layout_constraintStart_toStartOf="@+id/tvHourNeed"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvHourNeed"
+            tools:listitem="@layout/item_sub_modul"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

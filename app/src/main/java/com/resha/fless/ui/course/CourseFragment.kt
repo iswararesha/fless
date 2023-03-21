@@ -1,60 +1,101 @@
 package com.resha.fless.ui.course
 
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.resha.fless.R
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.resha.fless.databinding.FragmentCourseBinding
+import com.resha.fless.model.Course
+import com.resha.fless.model.UserPreference
+import com.resha.fless.ui.ViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CourseFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+private val Context.dataStore by preferencesDataStore("user")
 class CourseFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentCourseBinding? = null
+    private lateinit var courseViewModel: CourseViewModel
+    private lateinit var dataStore : DataStore<Preferences>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        dataStore = requireContext().dataStore
+        _binding = FragmentCourseBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+        setupViewModel()
+
+        return root
+    }
+
+    private fun setupViewModel() {
+        courseViewModel = ViewModelProvider(this,
+            ViewModelFactory(UserPreference.getInstance(dataStore))
+        )[CourseViewModel::class.java]
+
+        courseViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
+        courseViewModel.getCourse()
+
+        courseViewModel.courseData.observe(viewLifecycleOwner) {
+            setCourseData(it)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course, container, false)
+    private fun setCourseData(data: List<Course>){
+        if(data.isNotEmpty()){
+            binding.rvListCourse.visibility = View.VISIBLE
+
+            if(context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
+                binding.rvListCourse.layoutManager = GridLayoutManager(context, 2)
+            }else{
+                binding.rvListCourse.layoutManager = LinearLayoutManager(context)
+            }
+
+            val listCourseAdapter = ListCourseAdapter(data)
+            binding.rvListCourse.adapter = listCourseAdapter
+
+            listCourseAdapter.setOnItemClickCallback(object: ListCourseAdapter.OnItemClickCallback{
+                override fun onItemClicked(course: Course) {
+                    showSelectedCourse(course)
+                }
+            })
+        }else{
+            binding.rvListCourse.visibility = View.INVISIBLE
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CourseFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CourseFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun showSelectedCourse(course: Course) {
+        val intent = Intent(context, CourseDetailActivity::class.java)
+        intent.putExtra(CourseDetailActivity.COURSE_DETAIL, course)
+        startActivity(intent)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if(isLoading){
+            binding.loading.visibility = View.VISIBLE
+        }else{
+            binding.loading.visibility = View.GONE
+        }
     }
 }

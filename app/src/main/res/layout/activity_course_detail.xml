@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.course.CourseFragment">
+    tools:context=".ui.course.CourseDetailActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListCourse"
+        android:id="@+id/rvListModul"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_course" />
+        tools:listitem="@layout/item_modul" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loading"
