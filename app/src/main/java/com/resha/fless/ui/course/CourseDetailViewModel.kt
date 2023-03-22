@@ -75,11 +75,11 @@ class CourseDetailViewModel(private val pref: UserPreference) : ViewModel()  {
                             document.getString("name"),
                             document.getString("type"),
                             courseParent,
-                            modulParent
+                            modulParent,
+                            document.getString("nextSubModulId"),
+                            document.getString("nextModulParent")
                         )
-                        if(itemList != null){
-                            subModul.add(itemList)
-                        }
+                        subModul.add(itemList)
                     }
                 } else {
                     Log.w(ContentValues.TAG, "Error getting documents.", task.exception)

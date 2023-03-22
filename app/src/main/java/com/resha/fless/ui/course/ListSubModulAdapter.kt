@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.resha.fless.R
 import com.resha.fless.databinding.ItemSubModulBinding
+import com.resha.fless.model.Material
 import com.resha.fless.model.SubModul
 import com.resha.fless.ui.material.MaterialActivity
 
@@ -29,12 +30,16 @@ class ListSubModulAdapter(private val listData : List<SubModul>) :
     override fun onBindViewHolder(holder: ListSubModulAdapter.ListViewHolder, position: Int) {
         holder.binding.apply {
             tvSubModulName.text= listData[position].name
-            if(listData[position].type == "material"){
-                cardView.setOnClickListener{
-                    val intent = Intent(context, MaterialActivity::class.java)
-                    intent.putExtra(MaterialActivity.MATERIAL_DETAIL, listData[position])
-                    context.startActivity(intent)
-                }
+            cardView.setOnClickListener{
+                val nextMaterial = Material(
+                    listData[position].subModulId,
+                    listData[position].courseParent,
+                    listData[position].modulParent
+                )
+
+                val intent = Intent(context, MaterialActivity::class.java)
+                intent.putExtra(MaterialActivity.MATERIAL_DETAIL, nextMaterial)
+                context.startActivity(intent)
             }
         }
     }

@@ -48,7 +48,6 @@ class MaterialAdapter (private val listData : List<Content>) :
     }
 
      override fun getItemViewType (position: Int): Int {
-        Log.e(ContentValues.TAG, listData[position].type!! + " from getContent")
         return when (listData[position].type) {
             "text" -> txtType
             "img" -> imgType
@@ -59,7 +58,6 @@ class MaterialAdapter (private val listData : List<Content>) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.e(ContentValues.TAG, "$viewType from onCreate")
         context = parent.context
         return when (viewType) {
             txtType -> {
@@ -86,7 +84,6 @@ class MaterialAdapter (private val listData : List<Content>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.e(ContentValues.TAG, getItemViewType (position).toString() + " from onBind")
         if (getItemViewType (position) == txtType) {
             (holder as TextMaterialViewHolder).bind(listData[position])
         } else if (getItemViewType (position) == imgType) {
