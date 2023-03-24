@@ -2,6 +2,9 @@ package com.resha.fless.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.resha.fless.evaluation.EssayActivity
+import com.resha.fless.evaluation.EssayViewModel
+import com.resha.fless.evaluation.ObjectiveViewModel
 import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.course.CourseDetailViewModel
 import com.resha.fless.ui.course.CourseViewModel
@@ -36,6 +39,12 @@ class ViewModelFactory (private val userPref: UserPreference) : ViewModelProvide
             }
             modelClass.isAssignableFrom((MaterialViewModel::class.java)) -> {
                 MaterialViewModel(userPref) as T
+            }
+            modelClass.isAssignableFrom((ObjectiveViewModel::class.java)) -> {
+                ObjectiveViewModel(userPref) as T
+            }
+            modelClass.isAssignableFrom((EssayViewModel::class.java)) -> {
+                EssayViewModel(userPref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

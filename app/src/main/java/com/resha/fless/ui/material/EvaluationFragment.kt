@@ -2,7 +2,6 @@ package com.resha.fless.ui.material
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,18 +11,17 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.resha.fless.databinding.FragmentMaterialBinding
-import com.resha.fless.model.Content
+import com.resha.fless.R
 import com.resha.fless.model.Material
-import com.resha.fless.model.SubModul
 import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.ViewModelFactory
+import com.resha.fless.databinding.FragmentEvaluationBinding
+import com.resha.fless.evaluation.EssayActivity
+import com.resha.fless.evaluation.ObjectiveActivity
 
 private val Context.dataStore by preferencesDataStore("user")
-class MaterialFragment : Fragment() {
-    private var _binding: FragmentMaterialBinding? = null
+class EvaluationFragment : Fragment() {
+    private var _binding: FragmentEvaluationBinding? = null
     private lateinit var materialViewModel: MaterialViewModel
     private lateinit var dataStore : DataStore<Preferences>
 
@@ -36,7 +34,7 @@ class MaterialFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         dataStore = requireContext().dataStore
-        _binding = FragmentMaterialBinding.inflate(inflater, container, false)
+        _binding = FragmentEvaluationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         setupViewModel()
@@ -54,36 +52,11 @@ class MaterialFragment : Fragment() {
             showLoading(it)
         }
 
-        val bundle = arguments
-        val material = bundle!!.getParcelable<Material>("material")
-
-        if(material != null) materialViewModel.getContent(material)
-
-        materialViewModel.contentData.observe(viewLifecycleOwner) {
-            setMaterialData(it)
-        }
-    }
-
-    private fun setMaterialData(data: List<Content>){
-        if(data.isNotEmpty()){
-            binding.rvMaterial.visibility = View.VISIBLE
-
-            if(context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
-                binding.rvMaterial.layoutManager = GridLayoutManager(context, 2)
-            }else{
-                binding.rvMaterial.layoutManager = LinearLayoutManager(context)
-            }
-
-            val materialAdapter = MaterialAdapter(data)
-            binding.rvMaterial.adapter = materialAdapter
-
-        }else{
-            binding.rvMaterial.visibility = View.INVISIBLE
-        }
+        val transaction = childFragmentManager.beginTransaction()
     }
 
     private fun setupAction(){
-        binding.nextButton.setOnClickListener(){
+        binding.attempButton.setOnClickListener(){
 
             val bundle = arguments
             val material = bundle!!.getParcelable<Material>("material")
@@ -91,16 +64,17 @@ class MaterialFragment : Fragment() {
             if(material != null) materialViewModel.getSubModul(material)
 
             materialViewModel.materialData.observe(viewLifecycleOwner){
-                val nextMaterial = Material(
-                    it.nextSubModulId,
-                    it.courseParent,
-                    it.nextModulParent
-                )
-
-                val intent = Intent(context, MaterialActivity::class.java)
-                intent.putExtra(MaterialActivity.MATERIAL_DETAIL, nextMaterial)
-                startActivity(intent)
-                activity?.finish()
+                if(it.type == "test"){
+                    val intent = Intent(context, ObjectiveActivity::class.java)
+                    intent.putExtra(ObjectiveActivity.MATERIAL_DETAIL, material)
+                    startActivity(intent)
+                    activity?.finish()
+                }else if(it.type == "practice"){
+                    val intent = Intent(context, EssayActivity::class.java)
+                    intent.putExtra(EssayActivity.MATERIAL_DETAIL, material)
+                    startActivity(intent)
+                    activity?.finish()
+                }
 
                 materialViewModel.materialData.removeObservers(viewLifecycleOwner)
             }

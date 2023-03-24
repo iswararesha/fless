@@ -59,6 +59,18 @@ class MaterialActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.material_view_fragment, materialFragment, MaterialFragment::class.java.simpleName)
                 .commit()
+        }else{
+            val fragmentManager = supportFragmentManager
+            val evaluationFragment = EvaluationFragment()
+
+            val bundle = Bundle()
+            bundle.putParcelable("material", material)
+            evaluationFragment.arguments = bundle
+
+            fragmentManager
+                .beginTransaction()
+                .replace(R.id.material_view_fragment, evaluationFragment, MaterialFragment::class.java.simpleName)
+                .commit()
         }
     }
 }

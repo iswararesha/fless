@@ -12,22 +12,29 @@
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/drawable/ic_icon_logo.xml" value="0.1955" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1945" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_course_detail.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_essay.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_landing.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_material.xml" value="0.17481884057971014" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_objective.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_onboarding.xml" value="0.22" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/activity_splahscreen.xml" value="0.22" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/content_objective.xml" value="0.17481884057971014" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_attemp.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_course.xml" value="0.2" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_evaluation.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_home.xml" value="0.17255434782608695" />
-        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_material.xml" value="0.25" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_material.xml" value="0.18" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/fragment_task.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/item_course.xml" value="0.5" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/item_field.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/item_gif.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/item_img.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/item_modul.xml" value="0.33" />
+        <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/item_objective.xml" value="0.22" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/item_sub_modul.xml" value="0.33" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/item_submodul.xml" value="0.25" />
         <entry key="..\:/Users/resha/AndroidStudioProjects/fless/app/src/main/res/layout/item_text.xml" value="0.23236009732360097" />
