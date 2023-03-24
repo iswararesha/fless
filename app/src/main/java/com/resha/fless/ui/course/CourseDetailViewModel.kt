@@ -57,7 +57,7 @@ class CourseDetailViewModel(private val pref: UserPreference) : ViewModel()  {
     }
 
     private fun getSubModul(courseParent: String, modulParent: String): List<SubModul>{
-        var subModul : MutableList<SubModul> = mutableListOf()
+        val subModul : MutableList<SubModul> = mutableListOf()
 
         val db = FirebaseFirestore.getInstance()
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.resha.fless.model.*
@@ -55,30 +56,65 @@ class EssayViewModel (private val pref: UserPreference) : ViewModel()  {
             }
     }
 
-    fun sendAnswer(material: Material, answer: List<Answer>){
+    fun sendAnswer(material: Material, number: Int, answer: ArrayList<Answer>){
         _isLoading.value = true
 
         val db = FirebaseFirestore.getInstance()
-        val user = Firebase.auth.currentUser
-        val uid = user?.uid
-
-        val data: MutableMap<String, String> = mutableMapOf()
-        data["user"] = uid!!
-        data.putAll(answer.associate { it.number!! to it.answer!! })
 
         db.collection("course")
             .document(material.courseParent!!)
             .collection("learningMaterial")
             .document(material.modulParent!!)
-            .collection("subLearningMaterial")
+            .collection("answerEvaluation")
             .document(material.subModulId!!)
-            .collection("studentAttempt")
-            .add(data)
-            .addOnSuccessListener { documentReference ->
-                Log.d(ContentValues.TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(ContentValues.TAG, "Error adding document", e)
+            .get()
+            .addOnSuccessListener  { task ->
+                if (task != null) {
+                    Log.e(ContentValues.TAG, task.id)
+
+                    val rightAnswer = ArrayList<Answer>()
+                    for(i in 1..number){
+                        rightAnswer.add(Answer(
+                            "number$i",
+                            task.getString("number$i"))
+                        )
+                    }
+
+                    var total = 0
+                    for (i in 1..number){
+                        if(rightAnswer[i-1] == answer[i-1]) {
+                            total += 1
+                        }
+                    }
+                    val user = Firebase.auth.currentUser
+                    val uid = user?.uid
+
+                    val data: MutableMap<String, Any> = mutableMapOf()
+
+                    val score = total.toFloat()/number.toFloat()
+
+                    data["user"] = uid!!
+                    data["score"] = "$score"
+                    data["dateAttempt"] = FieldValue.serverTimestamp()
+
+                    db.collection("course")
+                        .document(material.courseParent!!)
+                        .collection("learningMaterial")
+                        .document(material.modulParent!!)
+                        .collection("subLearningMaterial")
+                        .document(material.subModulId!!)
+                        .collection("studentAttempt")
+                        .add(data)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d(ContentValues.TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(ContentValues.TAG, "Error adding document", e)
+                        }
+
+                }
+            }.addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "get failed with ", exception)
             }
 
         _isLoading.value = false

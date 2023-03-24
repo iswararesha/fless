@@ -78,14 +78,12 @@ class ObjectiveActivity : AppCompatActivity() {
             listObjectiveAdapter.setOnButtonChange(object: ListObjectiveAdapter.OnButtonCallback{
                 override fun onButtonChange(answer: Answer, id: Int) {
                     getAnswer[id-1] = answer
-                    Log.d("ANSWER", getAnswer.joinToString(" "))
                 }
             })
 
             binding.finishButton.setOnClickListener(){
-                Log.d("ANSWER", getAnswer.joinToString(" "))
                 binding.rvListObjective.visibility = View.INVISIBLE
-                objectiveViewModel.sendAnswer(material, getAnswer)
+                objectiveViewModel.sendAnswer(material, getAnswer.size, getAnswer)
 
                 val intent = Intent(this, MaterialActivity::class.java)
                 intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)

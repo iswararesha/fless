@@ -2,7 +2,6 @@ package com.resha.fless.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.resha.fless.evaluation.EssayActivity
 import com.resha.fless.evaluation.EssayViewModel
 import com.resha.fless.evaluation.ObjectiveViewModel
 import com.resha.fless.model.UserPreference

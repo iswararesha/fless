@@ -49,19 +49,19 @@ class ListObjectiveAdapter (private val listData : List<Objective>) : RecyclerVi
         holder.binding.option.setOnCheckedChangeListener { radioGroup, i ->
             when (i) {
                 R.id.optionA -> {
-                    answer = Answer("number$id", "OptionA")
+                    answer = Answer("number$id", "optionA")
                 }
                 R.id.optionB -> {
-                    answer = Answer("number$id", "OptionB")
+                    answer = Answer("number$id", "optionB")
                 }
                 R.id.optionC -> {
-                    answer = Answer("number$id", "OptionC")
+                    answer = Answer("number$id", "optionC")
                 }
                 R.id.optionD -> {
-                    answer = Answer("number$id", "OptionD")
+                    answer = Answer("number$id", "optionD")
                 }
                 R.id.optionE -> {
-                    answer = Answer("number$id", "OptionE")
+                    answer = Answer("number$id", "optionE")
                 }
             }
 

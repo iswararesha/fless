@@ -40,9 +40,7 @@ class CourseViewModel (private val userPref: UserPreference) : ViewModel() {
                             documents.getString("courseName"),
                             documents.getString("hourNeed")
                         )
-                        if(itemList != null){
-                            savedList.add(itemList)
-                        }
+                        savedList.add(itemList)
                     }
                     _courseData.value = savedList
 

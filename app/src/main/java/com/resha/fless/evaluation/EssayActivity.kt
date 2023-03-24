@@ -92,15 +92,12 @@ class EssayActivity : AppCompatActivity() {
             listEssayAdapter.setOnTextChange(object: ListEssayAdapter.OnTextCallback{
                 override fun onTextChange(answer: ArrayList<Answer>) {
                     getAnswer = answer
-                    Log.d("ANSWER", getAnswer.joinToString(" "))
                 }
             })
 
             binding.finishButton.setOnClickListener(){
-                Log.d("ANSWER", getAnswer.joinToString(" "))
-
                 binding.rvField.visibility = View.INVISIBLE
-                essayViewModel.sendAnswer(material, getAnswer)
+                essayViewModel.sendAnswer(material, getAnswer.size, getAnswer)
 
                 val intent = Intent(this, MaterialActivity::class.java)
                 intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
