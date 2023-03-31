@@ -1,5 +1,8 @@
 package com.resha.fless.ui.login
 
+import android.content.Context
+import android.util.Patterns
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -53,5 +56,26 @@ class LoginViewModel(private val userPref: UserPreference) : ViewModel()  {
                 }
             }
         _isLoading.value = false
+    }
+
+    fun forgotPassword(email: String, context: Context){
+        if (email.isEmpty()) {
+            return
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return
+        }
+
+        Firebase.auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(context,"Email verifikasi berhasil dikirim.",Toast.LENGTH_SHORT).show()
+                }else {
+                    val errorResponse = task.exception?.message
+
+                    Toast.makeText(context,errorResponse,Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 }

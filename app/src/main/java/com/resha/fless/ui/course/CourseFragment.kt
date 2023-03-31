@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import androidx.core.view.contains
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -37,8 +40,36 @@ class CourseFragment : Fragment() {
         val root: View = binding.root
 
         setupViewModel()
+        searchCourse()
 
         return root
+    }
+
+    private fun searchCourse(){
+        val searchView = binding.svCourse
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if(query == ""){
+                    courseViewModel.getCourse()
+                }
+
+                Log.d("onQueryTextSubmit", query)
+                courseViewModel.searchCourse(query)
+
+                return false
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                if(newText == ""){
+                    courseViewModel.getCourse()
+                }
+
+                Log.d("onQueryTextChange", newText)
+                courseViewModel.searchCourse(newText)
+
+                return false
+            }
+        })
     }
 
     private fun setupViewModel() {
@@ -60,18 +91,17 @@ class CourseFragment : Fragment() {
     private fun setCourseData(data: List<Course>){
         if(data.isNotEmpty()){
             binding.rvListCourse.visibility = View.VISIBLE
-
-            if(context?.resources?.configuration?.orientation == Configuration.ORIENTATION_LANDSCAPE){
-                binding.rvListCourse.layoutManager = GridLayoutManager(context, 2)
-            }else{
-                binding.rvListCourse.layoutManager = LinearLayoutManager(context)
-            }
+            binding.rvListCourse.layoutManager = LinearLayoutManager(context)
 
             val listCourseAdapter = ListCourseAdapter(data)
             binding.rvListCourse.adapter = listCourseAdapter
 
             listCourseAdapter.setOnItemClickCallback(object: ListCourseAdapter.OnItemClickCallback{
                 override fun onItemClicked(course: Course) {
+                    if(!course.isOpen!!){
+                        courseViewModel.setStatus(course)
+                    }
+
                     showSelectedCourse(course)
                 }
             })

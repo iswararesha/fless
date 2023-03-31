@@ -33,11 +33,15 @@ class ListCourseAdapter(private val listData : List<Course>) :RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val (_, _, courseName, totalMaterial) = listData[position]
+        val (_, _, courseName, totalMaterial, _) = listData[position]
         holder.tvCourseName.text = courseName
         holder.tvTotalMaterial.text = totalMaterial.toString()
         holder.itemView.setOnClickListener{onItemClickCallback.onItemClicked(listData[holder.adapterPosition])}
     }
 
     override fun getItemCount(): Int = listData.size
+
+    fun notifySearch(){
+        notifyDataSetChanged()
+    }
 }

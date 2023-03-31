@@ -1,8 +1,6 @@
 package com.resha.fless.ui.material
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,19 +10,17 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.resha.fless.R
+import com.resha.fless.databinding.FragmentDrawerBinding
 import com.resha.fless.databinding.FragmentMaterialBinding
-import com.resha.fless.model.Content
 import com.resha.fless.model.Material
-import com.resha.fless.model.SubModul
-import com.resha.fless.model.UserPreference
-import com.resha.fless.ui.ViewModelFactory
+import com.resha.fless.model.Modul
+import com.resha.fless.ui.course.ListModulAdapter
 
 private val Context.dataStore by preferencesDataStore("user")
-class MaterialFragment : Fragment() {
-    private var _binding: FragmentMaterialBinding? = null
+class DrawerFragment : Fragment() {
+    private var _binding: FragmentDrawerBinding? = null
     private val materialViewModel: MaterialViewModel by activityViewModels()
     private lateinit var dataStore : DataStore<Preferences>
 
@@ -36,7 +32,7 @@ class MaterialFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         dataStore = requireContext().dataStore
-        _binding = FragmentMaterialBinding.inflate(inflater, container, false)
+        _binding = FragmentDrawerBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         setupViewModel()
@@ -50,36 +46,25 @@ class MaterialFragment : Fragment() {
         }
 
         materialViewModel.materialData.observe(viewLifecycleOwner){
-            val material = Material(
-                it.subModulId,
-                it.courseParent,
-                it.modulParent
-            )
-
-            materialViewModel.getContent(material)
+            materialViewModel.getModul(it.courseParent!!)
         }
 
-        materialViewModel.contentData.observe(viewLifecycleOwner) {
-            setMaterialData(it)
+        materialViewModel.modulData.observe(viewLifecycleOwner) {
+            setModulData(it)
         }
     }
 
-    private fun setMaterialData(data: List<Content>){
+    private fun setModulData(data: List<Modul>){
         if(data.isNotEmpty()){
-            binding.rvMaterial.visibility = View.VISIBLE
-            binding.rvMaterial.layoutManager = LinearLayoutManager(context)
+            binding.rvListModul.visibility = View.VISIBLE
+            binding.rvListModul.layoutManager = LinearLayoutManager(context)
 
-            val materialAdapter = MaterialAdapter(data)
-            binding.rvMaterial.adapter = materialAdapter
+            val drawerModulAdapter = DrawerModulAdapter(data)
+            binding.rvListModul.adapter = drawerModulAdapter
 
         }else{
-            binding.rvMaterial.visibility = View.INVISIBLE
+            binding.rvListModul.visibility = View.INVISIBLE
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -88,5 +73,10 @@ class MaterialFragment : Fragment() {
         }else{
             binding.loading.visibility = View.GONE
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

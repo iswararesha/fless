@@ -13,5 +13,6 @@ data class SubModul(
     val prevSubModulId: String? = null,
     val prevModulParent: String? = null,
     val nextSubModulId: String? = null,
-    val nextModulParent: String? = null
+    val nextModulParent: String? = null,
+    val isOpen: Boolean? = false
 ) : Parcelable

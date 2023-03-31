@@ -57,8 +57,12 @@ class ObjectiveViewModel (private val pref: UserPreference) : ViewModel()  {
                     _isLoading.value = false
                 } else {
                     Log.w(ContentValues.TAG, "Error getting documents.", task.exception)
+
+                    _isLoading.value = false
                 }
             }
+
+        _isLoading.value = false
     }
 
     fun sendAnswer(material: Material, number: Int, answer: ArrayList<Answer>){
@@ -112,16 +116,20 @@ class ObjectiveViewModel (private val pref: UserPreference) : ViewModel()  {
                         .add(data)
                         .addOnSuccessListener { documentReference ->
                             Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+
+                            _isLoading.value = false
                         }
                         .addOnFailureListener { e ->
                             Log.w(TAG, "Error adding document", e)
+
+                            _isLoading.value = false
                         }
 
                 }
             }.addOnFailureListener { exception ->
                 Log.d(TAG, "get failed with ", exception)
-            }
 
-        _isLoading.value = false
+                _isLoading.value = false
+            }
     }
 }

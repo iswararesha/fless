@@ -31,9 +31,7 @@ class EvaluationAdapter (private val listData : List<Attempt>) :
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val id = listData[position]
 
-        val date = SimpleDateFormat("dd MMMM yyyy - hh:mm a", Locale("id", "ID")).format(id.dateAttempt?.toDate())
-
-        holder.tvDateAttempt.text = date
+        holder.tvDateAttempt.text = id.dateAttempt
         holder.tvScoreAttempt.text = id.score
     }
 

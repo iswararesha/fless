@@ -1,22 +1,17 @@
 package com.resha.fless.ui.course
 
-import android.content.ContentValues
 import android.content.Context
-import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resha.fless.databinding.ActivityCourseDetailBinding
 import com.resha.fless.model.Course
 import com.resha.fless.model.Modul
-import com.resha.fless.model.SubModul
 import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 
@@ -48,6 +43,7 @@ class CourseDetailActivity : AppCompatActivity() {
         courseDetailViewModel.isLoading.observe(this) {
             showLoading(it)
         }
+
         if(course.courseId != null){
             courseDetailViewModel.getModul(course.courseId.toString())
         }
@@ -60,12 +56,7 @@ class CourseDetailActivity : AppCompatActivity() {
     private fun setModulData(data: List<Modul>){
         if(data.isNotEmpty()){
             binding.rvListModul.visibility = View.VISIBLE
-
-            if(applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-                binding.rvListModul.layoutManager = GridLayoutManager(this, 2)
-            }else{
-                binding.rvListModul.layoutManager = LinearLayoutManager(this)
-            }
+            binding.rvListModul.layoutManager = LinearLayoutManager(this)
 
             val listModulAdapter = ListModulAdapter(data)
             binding.rvListModul.adapter = listModulAdapter
@@ -80,6 +71,14 @@ class CourseDetailActivity : AppCompatActivity() {
             binding.loading.visibility = View.VISIBLE
         }else{
             binding.loading.visibility = View.GONE
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        courseDetailViewModel.modulData.removeObservers(this)
+        courseDetailViewModel.modulData.observe(this) {
+            setModulData(it)
         }
     }
 }

@@ -2,40 +2,28 @@ package com.resha.fless.ui.material
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import com.resha.fless.databinding.FragmentMaterialBinding
 import com.resha.fless.databinding.FragmentTaskViewBinding
 import com.resha.fless.model.Content
 import com.resha.fless.model.Material
-import com.resha.fless.model.SubModul
-import com.resha.fless.model.UserPreference
-import com.resha.fless.ui.ViewModelFactory
-import java.io.File
-import java.io.FileInputStream
 
 private val Context.dataStore by preferencesDataStore("user")
 class TaskViewFragment : Fragment() {
     private var _binding: FragmentTaskViewBinding? = null
-    private lateinit var materialViewModel: MaterialViewModel
+    private val materialViewModel: MaterialViewModel by activityViewModels()
     private lateinit var dataStore : DataStore<Preferences>
 
     private val binding get() = _binding!!
@@ -43,7 +31,7 @@ class TaskViewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         dataStore = requireContext().dataStore
         _binding = FragmentTaskViewBinding.inflate(inflater, container, false)
@@ -56,18 +44,17 @@ class TaskViewFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        materialViewModel = ViewModelProvider(this,
-            ViewModelFactory(UserPreference.getInstance(dataStore))
-        )[MaterialViewModel::class.java]
-
         materialViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
 
-        val bundle = arguments
-        val material = bundle!!.getParcelable<Material>("material")
+        materialViewModel.materialData.observe(viewLifecycleOwner){
+            val material = Material(
+                it.subModulId,
+                it.courseParent,
+                it.modulParent
+            )
 
-        if(material != null) {
             materialViewModel.getContent(material)
             materialViewModel.getUserTask(material)
         }
@@ -75,8 +62,6 @@ class TaskViewFragment : Fragment() {
         materialViewModel.contentData.observe(viewLifecycleOwner) {
             setMaterialData(it)
         }
-
-
 
         materialViewModel.taskStatus.observe(viewLifecycleOwner) {
             setStatus(it)
@@ -89,6 +74,8 @@ class TaskViewFragment : Fragment() {
             binding.tvChosenFile.visibility = View.GONE
             binding.chooseFileButton.visibility = View.GONE
             binding.uploadButton.visibility = View.GONE
+
+            (activity as MaterialActivity).setButtonOn()
         }else{
             binding.imgStatus.visibility = View.INVISIBLE
             binding.tvChosenFile.visibility = View.VISIBLE
@@ -111,48 +98,21 @@ class TaskViewFragment : Fragment() {
     }
 
     private fun setupAction(){
-        val bundle = arguments
-        val material = bundle!!.getParcelable<Material>("material")
-
         binding.chooseFileButton.setOnClickListener(){
             startDocument()
         }
 
         binding.uploadButton.setOnClickListener(){
-            if(material != null) {
-                if(getFile != null){
+            materialViewModel.materialData.observe(viewLifecycleOwner) {
+                val material = Material(
+                    it.subModulId,
+                    it.courseParent,
+                    it.modulParent
+                )
+
+                if (getFile != null) {
                     materialViewModel.uploadTask(material, getFile!!, getFileName!!)
                 }
-            }
-        }
-
-        binding.previousButton.setOnClickListener() {
-            if (material != null) materialViewModel.getSubModul(material)
-
-            materialViewModel.materialData.observe(viewLifecycleOwner) {
-                val prevMaterial = Material(
-                    it.prevSubModulId,
-                    it.courseParent,
-                    it.prevModulParent
-                )
-
-                moveData(prevMaterial)
-                materialViewModel.materialData.removeObservers(viewLifecycleOwner)
-            }
-        }
-
-        binding.nextButton.setOnClickListener(){
-            if(material != null) materialViewModel.getSubModul(material)
-
-            materialViewModel.materialData.observe(viewLifecycleOwner){
-                val nextMaterial = Material(
-                    it.nextSubModulId,
-                    it.courseParent,
-                    it.nextModulParent
-                )
-
-                moveData(nextMaterial)
-                materialViewModel.materialData.removeObservers(viewLifecycleOwner)
             }
         }
     }
@@ -198,17 +158,6 @@ class TaskViewFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun moveData(material: Material){
-        if (material.subModulId == "none") {
-            activity?.finish()
-        } else {
-            val intent = Intent(context, MaterialActivity::class.java)
-            intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
-            startActivity(intent)
-            activity?.finish()
-        }
     }
 
     private fun showLoading(isLoading: Boolean) {

@@ -71,6 +71,11 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             actionRegister()
         }
+
+        binding.tvForgotPassword.setOnClickListener(){
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupView() {

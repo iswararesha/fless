@@ -50,35 +50,13 @@
             android:layout_marginTop="15dp"
             android:minWidth="125dp"
             android:text="@string/attempt"
-            app:layout_constraintEnd_toEndOf="@+id/nextButton"
-            app:layout_constraintStart_toStartOf="@+id/previousButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/rvAttempt"
             app:layout_constraintTop_toBottomOf="@+id/bottom_card_view" />
-
-        <Button
-            android:id="@+id/nextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="15dp"
-            android:minWidth="125dp"
-            android:text="@string/next"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/previousButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginBottom="15dp"
-            android:minWidth="125dp"
-            android:text="@string/previous"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
-            android:layout_width="0dp"
+            android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
@@ -103,8 +81,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/dateAttempt"
-                    android:textStyle="bold"
                     android:textColor="@color/white"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -117,8 +95,8 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/score"
-                    android:textStyle="bold"
                     android:textColor="@color/white"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvDateAttempt"
@@ -128,10 +106,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAttempt"
-            android:layout_width="0dp"
-            android:layout_height="257dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
+            android:layout_width="0sp"
+            android:layout_height="257sp"
+            android:layout_marginStart="1sp"
+            android:layout_marginEnd="1sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,8 +118,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/bottom_card_view"
-            android:layout_width="0dp"
-            android:layout_height="10dp"
+            android:layout_width="0sp"
+            android:layout_height="10sp"
             android:layout_gravity="center"
             android:padding="5dp"
             app:cardBackgroundColor="@color/firstBlue"

@@ -107,16 +107,20 @@ class EssayViewModel (private val pref: UserPreference) : ViewModel()  {
                         .add(data)
                         .addOnSuccessListener { documentReference ->
                             Log.d(ContentValues.TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+
+                            _isLoading.value = false
                         }
                         .addOnFailureListener { e ->
                             Log.w(ContentValues.TAG, "Error adding document", e)
+
+                            _isLoading.value = false
                         }
 
                 }
             }.addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "get failed with ", exception)
-            }
 
-        _isLoading.value = false
+                _isLoading.value = false
+            }
     }
 }

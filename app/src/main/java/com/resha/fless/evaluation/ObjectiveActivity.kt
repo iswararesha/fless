@@ -61,12 +61,7 @@ class ObjectiveActivity : AppCompatActivity() {
     private fun setObjectiveData(data: List<Objective>){
         if(data.isNotEmpty()){
             binding.rvListObjective.visibility = View.VISIBLE
-
-            if(applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-                binding.rvListObjective.layoutManager = GridLayoutManager(this, 2)
-            }else{
-                binding.rvListObjective.layoutManager = LinearLayoutManager(this)
-            }
+            binding.rvListObjective.layoutManager = LinearLayoutManager(this)
 
             val listObjectiveAdapter = ListObjectiveAdapter(data)
             binding.rvListObjective.adapter = listObjectiveAdapter
@@ -83,16 +78,14 @@ class ObjectiveActivity : AppCompatActivity() {
             })
 
             binding.finishButton.setOnClickListener(){
-                binding.loading.visibility = View.VISIBLE
-                binding.rvListObjective.visibility = View.INVISIBLE
                 objectiveViewModel.sendAnswer(material, getAnswer.size, getAnswer)
-
-                Handler().postDelayed({
-                    val intent = Intent(this, MaterialActivity::class.java)
-                    intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
-                    startActivity(intent)
-                    finish()
-                }, 2000)
+                objectiveViewModel.isLoading.observe(this){
+                    if(it){
+                        binding.svObjective.visibility = View.INVISIBLE
+                    }else{
+                        finish()
+                    }
+                }
             }
         }else{
             binding.rvListObjective.visibility = View.INVISIBLE
@@ -102,8 +95,10 @@ class ObjectiveActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         if(isLoading){
             binding.loading.visibility = View.VISIBLE
+            binding.svObjective.visibility = View.INVISIBLE
         }else{
             binding.loading.visibility = View.GONE
+            binding.svObjective.visibility = View.VISIBLE
         }
     }
 }

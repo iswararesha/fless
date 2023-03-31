@@ -7,6 +7,8 @@
     <string name="register">Register</string>
     <string name="landingText">Lets Get Started!</string>
     <string name="haveAccount">Already have an account?</string>
+    <string name="forgotPassword">Lupa Password</string>
+    <string name="sendVerification">Verifikasi</string>
 
     //Register and Login
     <string name="helloAgain">Hello Again!</string>
@@ -56,4 +58,11 @@
     <string name="uploadButton">Kirim File</string>
     <string name="directory">Pilih file yang ingin anda kirim.</string>
     <string name="status">Kamu sudah menyelesaikan tugas ini.</string>
+
+    //Material
+    <string name="material">Material</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

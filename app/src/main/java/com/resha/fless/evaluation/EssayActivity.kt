@@ -72,12 +72,7 @@ class EssayActivity : AppCompatActivity() {
             .into(binding.imgQuestion)
 
         binding.rvField.visibility = View.VISIBLE
-
-        if(applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            binding.rvField.layoutManager = GridLayoutManager(this, 2)
-        }else{
-            binding.rvField.layoutManager = LinearLayoutManager(this)
-        }
+        binding.rvField.layoutManager = LinearLayoutManager(this)
 
         var getAnswer = ArrayList<Answer>()
 
@@ -97,20 +92,14 @@ class EssayActivity : AppCompatActivity() {
             })
 
             binding.finishButton.setOnClickListener(){
-                binding.tvQuestion.visibility = View.GONE
-                binding.imgQuestion.visibility = View.GONE
-                binding.imgProgram.visibility = View.GONE
-                binding.loading.visibility = View.VISIBLE
-                binding.rvField.visibility = View.GONE
-
                 essayViewModel.sendAnswer(material, getAnswer.size, getAnswer)
-
-                Handler().postDelayed({
-                    val intent = Intent(this, MaterialActivity::class.java)
-                    intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
-                    startActivity(intent)
-                    finish()
-                }, 2000)
+                essayViewModel.isLoading.observe(this){
+                    if(it){
+                        binding.svEssay.visibility = View.INVISIBLE
+                    }else{
+                        finish()
+                    }
+                }
             }
         }
     }
@@ -118,8 +107,10 @@ class EssayActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         if(isLoading){
             binding.loading.visibility = View.VISIBLE
-        }else{
+            binding.svEssay.visibility = View.INVISIBLE
+        }else {
             binding.loading.visibility = View.GONE
+            binding.svEssay.visibility = View.VISIBLE
         }
     }
 }

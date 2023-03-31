@@ -1,7 +1,6 @@
-package com.resha.fless.ui.course
+package com.resha.fless.ui.material
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.resha.fless.R
 import com.resha.fless.databinding.ItemSubModulBinding
 import com.resha.fless.model.Material
-import com.resha.fless.model.Modul
 import com.resha.fless.model.SubModul
-import com.resha.fless.ui.material.MaterialActivity
 
-class ListSubModulAdapter(private var listData : List<SubModul>) :
-    RecyclerView.Adapter<ListSubModulAdapter.ListViewHolder>(){
+class DrawerSubModulAdapter(private var listData : List<SubModul>) :
+    RecyclerView.Adapter<DrawerSubModulAdapter.ListViewHolder>(){
 
     lateinit var context: Context
 
@@ -40,9 +37,9 @@ class ListSubModulAdapter(private var listData : List<SubModul>) :
                         listData[position].modulParent
                     )
 
-                    val intent = Intent(context, MaterialActivity::class.java)
-                    intent.putExtra(MaterialActivity.MATERIAL_DETAIL, nextMaterial)
-                    context.startActivity(intent)
+                    if (context is MaterialActivity) {
+                        (context as MaterialActivity).getNewMaterial(nextMaterial)
+                    }
                 }
             }else{
                 tvSubModulName.setTextColor(ContextCompat.getColor(context, R.color.firstYellow))

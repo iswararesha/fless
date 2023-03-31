@@ -12,6 +12,7 @@ import com.resha.fless.ui.main.MainViewModel
 import com.resha.fless.ui.material.MaterialViewModel
 import com.resha.fless.ui.profile.ProfileViewModel
 import com.resha.fless.ui.register.RegisterViewModel
+import com.resha.fless.ui.task.TaskViewModel
 
 class ViewModelFactory (private val userPref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
 
@@ -44,6 +45,9 @@ class ViewModelFactory (private val userPref: UserPreference) : ViewModelProvide
             }
             modelClass.isAssignableFrom((EssayViewModel::class.java)) -> {
                 EssayViewModel(userPref) as T
+            }
+            modelClass.isAssignableFrom((TaskViewModel::class.java)) -> {
+                TaskViewModel(userPref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

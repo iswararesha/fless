@@ -22,6 +22,7 @@
         app:lottie_rawRes="@raw/loading" />
 
     <ScrollView
+        android:id="@+id/svEssay"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
