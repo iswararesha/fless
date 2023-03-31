@@ -35,7 +35,6 @@ class EvaluationFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,6 +62,7 @@ class EvaluationFragment : Fragment() {
         val bundle = arguments
         val material = bundle!!.getParcelable<Material>("material")
 
+
         if(material != null) materialViewModel.getUserAttempt(material)
 
         materialViewModel.attemptData.observe(viewLifecycleOwner){
@@ -71,11 +71,25 @@ class EvaluationFragment : Fragment() {
     }
 
     private fun setupAction(){
-        binding.nextButton.setOnClickListener(){
+        val bundle = arguments
+        val material = bundle!!.getParcelable<Material>("material")
 
-            val bundle = arguments
-            val material = bundle!!.getParcelable<Material>("material")
+        binding.previousButton.setOnClickListener {
+            if (material != null) materialViewModel.getSubModul(material)
 
+            materialViewModel.materialData.observe(viewLifecycleOwner) {
+                val prevMaterial = Material(
+                    it.prevSubModulId,
+                    it.courseParent,
+                    it.prevModulParent
+                )
+
+                moveData(prevMaterial)
+                materialViewModel.materialData.removeObservers(viewLifecycleOwner)
+            }
+        }
+
+        binding.nextButton.setOnClickListener {
             if(material != null) materialViewModel.getSubModul(material)
 
             materialViewModel.materialData.observe(viewLifecycleOwner){
@@ -85,18 +99,12 @@ class EvaluationFragment : Fragment() {
                     it.nextModulParent
                 )
 
-                val intent = Intent(context, MaterialActivity::class.java)
-                intent.putExtra(MaterialActivity.MATERIAL_DETAIL, nextMaterial)
-                startActivity(intent)
-                activity?.finish()
+                moveData(nextMaterial)
+                materialViewModel.materialData.removeObservers(viewLifecycleOwner)
             }
         }
 
-        binding.attempButton.setOnClickListener(){
-
-            val bundle = arguments
-            val material = bundle!!.getParcelable<Material>("material")
-
+        binding.attempButton.setOnClickListener {
             if(material != null) materialViewModel.getSubModul(material)
 
             materialViewModel.materialData.observe(viewLifecycleOwner){
@@ -111,6 +119,8 @@ class EvaluationFragment : Fragment() {
                     startActivity(intent)
                     activity?.finish()
                 }
+
+                materialViewModel.materialData.removeObservers(viewLifecycleOwner)
             }
         }
     }
@@ -125,6 +135,17 @@ class EvaluationFragment : Fragment() {
 
         }else{
             binding.rvAttempt.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun moveData(material: Material){
+        if (material.subModulId == "none") {
+            activity?.finish()
+        } else {
+            val intent = Intent(context, MaterialActivity::class.java)
+            intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
+            startActivity(intent)
+            activity?.finish()
         }
     }
 

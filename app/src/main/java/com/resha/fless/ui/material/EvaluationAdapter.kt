@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.resha.fless.R
 import com.resha.fless.model.Attempt
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -30,12 +31,9 @@ class EvaluationAdapter (private val listData : List<Attempt>) :
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val id = listData[position]
 
-        val date = Date(id.dateAttempt?.toDate()!!.time)
-        val newDate = date.toString().substring(0, 16) + date.toString().substring(29, 34)
-        val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm")
-        val formattedDate = newDate.format(formatter)
+        val date = SimpleDateFormat("dd MMMM yyyy - hh:mm a", Locale("id", "ID")).format(id.dateAttempt?.toDate())
 
-        holder.tvDateAttempt.text = formattedDate
+        holder.tvDateAttempt.text = date
         holder.tvScoreAttempt.text = id.score
     }
 

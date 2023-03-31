@@ -10,6 +10,8 @@ data class SubModul(
     val type: String? = null,
     val courseParent: String? = null,
     val modulParent: String? = null,
+    val prevSubModulId: String? = null,
+    val prevModulParent: String? = null,
     val nextSubModulId: String? = null,
     val nextModulParent: String? = null
 ) : Parcelable

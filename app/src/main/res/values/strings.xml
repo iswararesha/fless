@@ -42,7 +42,7 @@
     //Course Item
     <string name="courseName">Course Name</string>
     <string name="courseDescription">Course Description</string>
-    <string name="hourNeed">Hour Need</string>
+    <string name="totalMaterial">Total Material</string>
     <string name="next">Next</string>
     <string name="previous">previous</string>
     <string name="attempt">Ambil Ujian</string>
@@ -50,4 +50,10 @@
     //Evaluation
     <string name="dateAttempt">Tanggal Uji Coba</string>
     <string name="score">Skor</string>
+
+    //TaskView
+    <string name="chooseButton">Pilih File</string>
+    <string name="uploadButton">Kirim File</string>
+    <string name="directory">Pilih file yang ingin anda kirim.</string>
+    <string name="status">Kamu sudah menyelesaikan tugas ini.</string>
 </resources>

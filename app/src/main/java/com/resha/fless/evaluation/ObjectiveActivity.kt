@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -82,13 +83,16 @@ class ObjectiveActivity : AppCompatActivity() {
             })
 
             binding.finishButton.setOnClickListener(){
+                binding.loading.visibility = View.VISIBLE
                 binding.rvListObjective.visibility = View.INVISIBLE
                 objectiveViewModel.sendAnswer(material, getAnswer.size, getAnswer)
 
-                val intent = Intent(this, MaterialActivity::class.java)
-                intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
-                startActivity(intent)
-                finish()
+                Handler().postDelayed({
+                    val intent = Intent(this, MaterialActivity::class.java)
+                    intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
+                    startActivity(intent)
+                    finish()
+                }, 2000)
             }
         }else{
             binding.rvListObjective.visibility = View.INVISIBLE

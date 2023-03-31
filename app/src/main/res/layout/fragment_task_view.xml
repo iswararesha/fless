@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.material.MaterialFragment">
+    tools:context=".ui.material.TaskViewFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,14 +44,31 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="15dp"
-                    android:minHeight="700dp"
-                    tools:listitem="@layout/item_text"
-                    android:nestedScrollingEnabled="false"/>
+                    android:minHeight="500dp"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_text" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imgStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginBottom="15dp"
+                        android:src="@drawable/ic_onboarding_4"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toTopOf="@+id/previousButton"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <Button
                         android:id="@+id/nextButton"
@@ -74,6 +91,38 @@
                         android:text="@string/previous"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
+
+                    <Button
+                        android:id="@+id/chooseFileButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/chooseButton"
+                        app:layout_constraintEnd_toEndOf="@+id/nextButton"
+                        app:layout_constraintStart_toStartOf="@+id/previousButton"
+                        app:layout_constraintTop_toBottomOf="@+id/tvChosenFile" />
+
+                    <Button
+                        android:id="@+id/uploadButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="25dp"
+                        android:text="@string/uploadButton"
+                        app:layout_constraintBottom_toTopOf="@+id/previousButton"
+                        app:layout_constraintEnd_toEndOf="@+id/chooseFileButton"
+                        app:layout_constraintStart_toStartOf="@+id/chooseFileButton"
+                        app:layout_constraintTop_toBottomOf="@+id/chooseFileButton" />
+
+                    <TextView
+                        android:id="@+id/tvChosenFile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/directory"
+                        app:layout_constraintEnd_toEndOf="@+id/chooseFileButton"
+                        app:layout_constraintStart_toStartOf="@+id/chooseFileButton"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

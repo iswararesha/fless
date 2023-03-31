@@ -47,30 +47,46 @@ class MaterialActivity : AppCompatActivity() {
     }
 
     private fun setFragment(subModul: SubModul){
-        if(subModul.type == "material"){
-            val fragmentManager = supportFragmentManager
-            val materialFragment = MaterialFragment()
+        when (subModul.type) {
+            "material" -> {
+                val fragmentManager = supportFragmentManager
+                val materialFragment = MaterialFragment()
 
-            val bundle = Bundle()
-            bundle.putParcelable("material", material)
-            materialFragment.arguments = bundle
+                val bundle = Bundle()
+                bundle.putParcelable("material", material)
+                materialFragment.arguments = bundle
 
-            fragmentManager
-                .beginTransaction()
-                .replace(R.id.material_view_fragment, materialFragment, MaterialFragment::class.java.simpleName)
-                .commit()
-        }else{
-            val fragmentManager = supportFragmentManager
-            val evaluationFragment = EvaluationFragment()
+                fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.material_view_fragment, materialFragment, MaterialFragment::class.java.simpleName)
+                    .commit()
+            }
+            "task" -> {
+                val fragmentManager = supportFragmentManager
+                val taskViewFragment = TaskViewFragment()
 
-            val bundle = Bundle()
-            bundle.putParcelable("material", material)
-            evaluationFragment.arguments = bundle
+                val bundle = Bundle()
+                bundle.putParcelable("material", material)
+                taskViewFragment.arguments = bundle
 
-            fragmentManager
-                .beginTransaction()
-                .replace(R.id.material_view_fragment, evaluationFragment, MaterialFragment::class.java.simpleName)
-                .commit()
+                fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.material_view_fragment, taskViewFragment, TaskViewFragment::class.java.simpleName)
+                    .commit()
+            }
+            else -> {
+                val fragmentManager = supportFragmentManager
+                val evaluationFragment = EvaluationFragment()
+
+                val bundle = Bundle()
+                bundle.putParcelable("material", material)
+                evaluationFragment.arguments = bundle
+
+                fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.material_view_fragment, evaluationFragment, EvaluationFragment::class.java.simpleName)
+                    .commit()
+            }
         }
     }
 }

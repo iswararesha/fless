@@ -44,7 +44,7 @@ class EssayViewModel (private val pref: UserPreference) : ViewModel()  {
                         task.getString("question"),
                         task.getString("programImg"),
                         task.getString("questionImg"),
-                        task.getLong("fieldNumber")?.toInt()
+                        task.getString("fieldNumber")?.toInt()
                     )
                     _essayData.value = itemList
 

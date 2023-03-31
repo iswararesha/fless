@@ -6,9 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Modul(
     val modulId: String? = null,
-    val modulDescription: String? = null,
     val modulName: String? = null,
-    val videoLink: String? = null,
-    val hourNeed: String? = null,
+    val totalMaterial: Int? = 0,
     val subModul: List<SubModul>? = null
 ) : Parcelable

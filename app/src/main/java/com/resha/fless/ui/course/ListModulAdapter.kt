@@ -27,18 +27,17 @@ class ListModulAdapter(private val listData : List<Modul>) : RecyclerView.Adapte
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ListModulAdapter.ListViewHolder {
+    ): ListViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_modul, parent, false)
         context = parent.context
         return ListViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ListModulAdapter.ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+        holder.setIsRecyclable(false)
         holder.binding.apply {
             val collection = listData[position]
-            tvModulDescription.text = collection.modulDescription
             tvModulName.text = collection.modulName
-            tvHourNeed.text = collection.hourNeed
 
             val listModulAdapter = ListSubModulAdapter(collection.subModul!!)
             rvSubModul.adapter = listModulAdapter

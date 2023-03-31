@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.datastore.core.DataStore
@@ -96,13 +97,20 @@ class EssayActivity : AppCompatActivity() {
             })
 
             binding.finishButton.setOnClickListener(){
-                binding.rvField.visibility = View.INVISIBLE
+                binding.tvQuestion.visibility = View.GONE
+                binding.imgQuestion.visibility = View.GONE
+                binding.imgProgram.visibility = View.GONE
+                binding.loading.visibility = View.VISIBLE
+                binding.rvField.visibility = View.GONE
+
                 essayViewModel.sendAnswer(material, getAnswer.size, getAnswer)
 
-                val intent = Intent(this, MaterialActivity::class.java)
-                intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
-                startActivity(intent)
-                finish()
+                Handler().postDelayed({
+                    val intent = Intent(this, MaterialActivity::class.java)
+                    intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
+                    startActivity(intent)
+                    finish()
+                }, 2000)
             }
         }
     }

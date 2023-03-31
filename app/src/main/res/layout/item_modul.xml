@@ -23,46 +23,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
             android:text="@string/courseName"
             android:textColor="@color/firstBlue"
             android:textStyle="bold"
+            card_view:layout_constraintBottom_toTopOf="@+id/rvSubModul"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvModulDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/courseDescription"
-            card_view:layout_constraintEnd_toEndOf="@+id/tvModulName"
-            card_view:layout_constraintStart_toStartOf="@+id/tvModulName"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvModulName" />
-
-        <TextView
-            android:id="@+id/tvHourNeed"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/hourNeed"
-            card_view:layout_constraintEnd_toEndOf="@+id/tvModulDescription"
-            card_view:layout_constraintStart_toStartOf="@+id/tvModulDescription"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvModulDescription" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSubModul"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:visibility="gone"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="@+id/tvHourNeed"
-            card_view:layout_constraintStart_toStartOf="@+id/tvHourNeed"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvHourNeed"
-            tools:listitem="@layout/item_sub_modul"/>
+            card_view:layout_constraintEnd_toEndOf="@+id/tvModulName"
+            card_view:layout_constraintStart_toStartOf="@+id/tvModulName"
+            tools:listitem="@layout/item_sub_modul" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

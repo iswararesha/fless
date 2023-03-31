@@ -38,7 +38,7 @@ class CourseViewModel (private val userPref: UserPreference) : ViewModel() {
                             documents.id,
                             documents.getString("courseDescription"),
                             documents.getString("courseName"),
-                            documents.getString("hourNeed")
+                            documents.getLong("totalMaterial")?.toInt()
                         )
                         savedList.add(itemList)
                     }

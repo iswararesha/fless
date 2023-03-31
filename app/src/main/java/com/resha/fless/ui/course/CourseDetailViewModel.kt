@@ -37,10 +37,8 @@ class CourseDetailViewModel(private val pref: UserPreference) : ViewModel()  {
                     for (documents in task.result) {
                         var itemList = Modul(
                             documents.id,
-                            documents.getString("modulDescription"),
                             documents.getString("modulName"),
-                            documents.getString("videoLink"),
-                            documents.getString("hourNeed"),
+                            documents.getLong("totalMaterial")?.toInt(),
                             getSubModul(courseParent, documents.id)
                         )
                         if(itemList != null){
@@ -51,7 +49,7 @@ class CourseDetailViewModel(private val pref: UserPreference) : ViewModel()  {
 
                     _isLoading.value = false
                 } else {
-                    Log.w(ContentValues.TAG, "Error getting documents.", task.exception)
+                    Log.w(TAG, "Error getting documents.", task.exception)
                 }
             }
     }
@@ -76,13 +74,15 @@ class CourseDetailViewModel(private val pref: UserPreference) : ViewModel()  {
                             document.getString("type"),
                             courseParent,
                             modulParent,
+                            document.getString("prevSubModulId"),
+                            document.getString("prevModulParent"),
                             document.getString("nextSubModulId"),
                             document.getString("nextModulParent")
                         )
                         subModul.add(itemList)
                     }
                 } else {
-                    Log.w(ContentValues.TAG, "Error getting documents.", task.exception)
+                    Log.w(TAG, "Error getting documents.", task.exception)
                 }
             }
         return subModul
