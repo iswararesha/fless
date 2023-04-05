@@ -6,12 +6,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.resha.fless.model.*
+import com.resha.fless.model.Answer
+import com.resha.fless.model.Material
+import com.resha.fless.model.Objective
+import com.resha.fless.model.UserPreference
 
 class ObjectiveViewModel (private val pref: UserPreference) : ViewModel()  {
     private val _isLoading = MutableLiveData<Boolean>()
@@ -19,10 +21,6 @@ class ObjectiveViewModel (private val pref: UserPreference) : ViewModel()  {
 
     private val _objectiveData = MutableLiveData<List<Objective>>()
     val objectiveData : LiveData<List<Objective>> = _objectiveData
-
-    fun getUser(): LiveData<UserModel> {
-        return pref.getUser().asLiveData()
-    }
 
     fun getObjective(material: Material){
         _isLoading.value = true
@@ -82,10 +80,10 @@ class ObjectiveViewModel (private val pref: UserPreference) : ViewModel()  {
                     Log.e(TAG, task.id)
 
                     val rightAnswer = ArrayList<Answer>()
-                    for(i in 1..number){
+                    for(i in answer){
                         rightAnswer.add(Answer(
-                            "number$i",
-                            task.getString("number$i"))
+                            i.number,
+                            task.getString("${i.number}"))
                         )
                     }
 

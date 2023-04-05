@@ -1,14 +1,10 @@
 package com.resha.fless.ui.landing
 
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.resha.fless.databinding.ActivityLandingBinding
 import com.resha.fless.ui.login.LoginActivity
-import com.resha.fless.ui.main.MainActivity
 import com.resha.fless.ui.register.RegisterActivity
 
 class LandingActivity : AppCompatActivity() {

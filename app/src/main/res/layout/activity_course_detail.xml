@@ -6,17 +6,99 @@
     android:layout_height="match_parent"
     tools:context=".ui.course.CourseDetailActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListModul"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_modul" />
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvListModul"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription"
+                    tools:listitem="@layout/item_modul" />
+
+                <ImageView
+                    android:id="@+id/frameVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_main_background" />
+
+                <TextView
+                    android:id="@+id/tvCourseName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/courseName"
+                    android:textColor="@color/firstBlue"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/tvCourseId"
+                    app:layout_constraintStart_toStartOf="@+id/frameVideo"
+                    app:layout_constraintTop_toBottomOf="@+id/frameVideo" />
+
+                <TextView
+                    android:id="@+id/tvCourseId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/courseName"
+                    android:textColor="@color/firstYellow"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvCourseName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvCourseName" />
+
+                <TextView
+                    android:id="@+id/tvCourseDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/courseDescription"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvCourseId"
+                    app:layout_constraintStart_toStartOf="@+id/tvCourseName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCourseName" />
+
+                <VideoView
+                    android:id="@+id/vvCourseIntro"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/frameVideo"
+                    app:layout_constraintEnd_toEndOf="@+id/frameVideo"
+                    app:layout_constraintStart_toStartOf="@+id/frameVideo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loading"
@@ -32,5 +114,4 @@
         app:lottie_autoPlay="true"
         app:lottie_rawRes="@raw/loading"
         app:lottie_loop="true" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

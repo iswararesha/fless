@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class Content(
     val contentId: String? = null,
     val content: String? = null,
-    val type: String? = null
+    val type: String? = null,
+    val textClass: String? = "normal"
 ) : Parcelable

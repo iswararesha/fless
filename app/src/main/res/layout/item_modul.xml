@@ -7,11 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginBottom="4dp"
-    card_view:cardCornerRadius="15dp">
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,13 +23,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="15dp"
             android:text="@string/courseName"
             android:textColor="@color/firstBlue"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toTopOf="@+id/rvSubModul"
-            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintEnd_toStartOf="@+id/imgDropDown"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -44,5 +43,16 @@
             card_view:layout_constraintEnd_toEndOf="@+id/tvModulName"
             card_view:layout_constraintStart_toStartOf="@+id/tvModulName"
             tools:listitem="@layout/item_sub_modul" />
+
+        <ImageView
+            android:id="@+id/imgDropDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:tint="@color/firstBlue"
+            card_view:layout_constraintBottom_toBottomOf="@+id/tvModulName"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="@+id/tvModulName"
+            card_view:srcCompat="@drawable/ic_baseline_arrow_drop_down" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -2,20 +2,25 @@ package com.resha.fless.ui.login
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.resha.fless.R
 import com.resha.fless.databinding.ActivityLoginBinding
 import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 import com.resha.fless.ui.main.MainActivity
 import com.resha.fless.ui.register.RegisterActivity
+import kotlinx.coroutines.launch
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 class LoginActivity : AppCompatActivity() {
@@ -48,15 +53,12 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.isSuccess.observe(this) {
             if (it) {
                 Toast.makeText(this, "Selamat anda berhasil login", Toast.LENGTH_SHORT)
-            }
-        }
 
-        loginViewModel.getUser().observe(this) { user ->
-            if (user.isLogin) {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
+                Handler().postDelayed({
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish() } , 2000)
             }
         }
     }
@@ -69,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            actionRegister()
+            actionLogin()
         }
 
         binding.tvForgotPassword.setOnClickListener(){
@@ -82,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    private fun actionRegister() {
+    private fun actionLogin() {
         val email = binding.editEmail
         val password = binding.editPassword
 
@@ -96,18 +98,32 @@ class LoginActivity : AppCompatActivity() {
 
     private fun checkValidation(email: EditText, password: EditText): Boolean {
         val isEmailError : Boolean = email.length() == 0
+        val isEmailFormatError : Boolean = !Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()
         val isPasswordError : Boolean = password.length() == 0
 
-        if(isEmailError || isPasswordError){
+        if(isEmailError || isEmailFormatError){
             if(isEmailError){
                 email.error = "Email harus diisi"
+                email.setBackgroundResource(R.drawable.error_border)
             }
 
-            if(isPasswordError){
-                password.error = "Password harus diisi"
+            if(isEmailFormatError){
+                email.error = "Isi Email dengan benar"
+                email.setBackgroundResource(R.drawable.error_border)
             }
 
             return false
+        }else{
+            email.setBackgroundResource(R.drawable.standard_border)
+        }
+
+        if(isPasswordError){
+            password.error = "Password harus diisi"
+            password.setBackgroundResource(R.drawable.error_border)
+
+            return false
+        }else{
+            password.setBackgroundResource(R.drawable.standard_border)
         }
 
         return true

@@ -2,8 +2,6 @@ package com.resha.fless.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.sql.Timestamp
-import java.util.*
 
 @Parcelize
 data class Attempt(

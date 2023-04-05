@@ -6,34 +6,140 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <Button
-        android:id="@+id/btnLogout"
+    <ImageView
+        android:id="@+id/imgBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="-55dp"
+        android:src="@drawable/ic_main_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/white"
+        android:minHeight="48dp"
+        android:text="@string/logout"
+        android:textColor="@color/firstBlue"
+        app:layout_constraintBottom_toTopOf="@+id/tvVersion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCredit"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
         android:id="@+id/tvNameUser"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="25dp"
         android:text="@string/name"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvEmailUser"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="3dp"
         android:text="@string/email"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvNameUser"
         app:layout_constraintStart_toStartOf="@+id/tvNameUser"
         app:layout_constraintTop_toBottomOf="@+id/tvNameUser" />
+
+    <Button
+        android:id="@+id/btnDarkMode"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_brightness_6_24"
+        android:drawableTint="@color/firstBlue"
+        android:minHeight="48dp"
+        android:text="@string/darkMode"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="@color/darkGrey"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogout"
+        app:layout_constraintStart_toStartOf="@+id/btnLogout"
+        app:layout_constraintTop_toBottomOf="@+id/imgBackground" />
+
+    <Button
+        android:id="@+id/btnChangePassword"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawableTint="@color/firstBlue"
+        android:minHeight="48dp"
+        android:text="@string/changePassword"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="@color/darkGrey"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/btnDarkMode"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnDarkMode"
+        app:layout_constraintTop_toBottomOf="@+id/btnDarkMode" />
+
+    <Button
+        android:id="@+id/btnContactDev"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_whatsapp_24"
+        android:drawableTint="@color/firstBlue"
+        android:minHeight="48dp"
+        android:text="@string/contectDev"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="@color/darkGrey"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/btnChangePassword"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnChangePassword"
+        app:layout_constraintTop_toBottomOf="@+id/btnChangePassword" />
+
+    <Button
+        android:id="@+id/btnCredit"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_code_24"
+        android:drawableTint="@color/firstBlue"
+        android:minHeight="48dp"
+        android:text="@string/credit"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="@color/darkGrey"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/btnContactDev"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnContactDev"
+        app:layout_constraintTop_toBottomOf="@+id/btnContactDev" />
+
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/appVersion"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogout"
+        app:layout_constraintStart_toStartOf="@+id/btnLogout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

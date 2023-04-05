@@ -9,9 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.resha.fless.R
-import com.resha.fless.databinding.ItemFieldBinding
 import com.resha.fless.model.Answer
-import com.resha.fless.model.Course
 
 class ListEssayAdapter (private val listData : List<Int>) : RecyclerView.Adapter<ListEssayAdapter.ListViewHolder>(){
     private lateinit var onTextCallback: OnTextCallback
@@ -48,7 +46,7 @@ class ListEssayAdapter (private val listData : List<Int>) : RecyclerView.Adapter
 
         holder.edtAnswerField.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
-                answer[id-1] = Answer("number$id", s.toString())
+                answer[id-1] = Answer("number$id", s.toString().trim())
                 onTextCallback.onTextChange(answer)
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

@@ -4,16 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.resha.fless.databinding.*
-import com.resha.fless.model.Content
-import com.resha.fless.model.Course
+import com.resha.fless.databinding.ItemFinishBinding
+import com.resha.fless.databinding.ItemOngoingBinding
+import com.resha.fless.model.Progress
 import com.resha.fless.model.Material
-import com.resha.fless.model.TaskModel
 import com.resha.fless.ui.task.Const.finished
 import com.resha.fless.ui.task.Const.onGoing
 
-class ListTaskAdapter (private val listData : List<TaskModel>) :
+class ListTaskAdapter (private val listData : List<Progress>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -29,14 +27,14 @@ class ListTaskAdapter (private val listData : List<TaskModel>) :
 
     inner class OnGoingViewHolder(private val itemOngoingBinding: ItemOngoingBinding) :
         RecyclerView.ViewHolder(itemOngoingBinding.root) {
-        fun bind(taskModel: TaskModel) {
-            itemOngoingBinding.tvTaskName.text = taskModel.taskId
-            itemOngoingBinding.tvDateOpen.text = taskModel.dateOpen
+        fun bind(progress: Progress) {
+            itemOngoingBinding.tvTaskName.text = progress.taskId
+            itemOngoingBinding.tvDateOpen.text = "Dibuka ${progress.dateOpen}"
 
             val material = Material(
-                taskModel.subModulId,
-                taskModel.courseParent,
-                taskModel.modulParent
+                progress.subModulId,
+                progress.courseParent,
+                progress.modulParent
             )
 
             itemOngoingBinding.cardView.setOnClickListener{onItemClickCallback.onItemClicked(material)}
@@ -45,14 +43,14 @@ class ListTaskAdapter (private val listData : List<TaskModel>) :
 
     inner class FinishViewHolder(private val itemFinishBinding: ItemFinishBinding) :
         RecyclerView.ViewHolder(itemFinishBinding.root) {
-        fun bind(taskModel: TaskModel) {
-            itemFinishBinding.tvTaskName.text = taskModel.taskId
-            itemFinishBinding.tvDateFinish.text = taskModel.dateFinish
+        fun bind(progress: Progress) {
+            itemFinishBinding.tvTaskName.text = progress.taskId
+            itemFinishBinding.tvDateFinish.text = "Selesai ${progress.dateFinish}"
 
             val material = Material(
-                taskModel.subModulId,
-                taskModel.courseParent,
-                taskModel.modulParent
+                progress.subModulId,
+                progress.courseParent,
+                progress.modulParent
             )
 
             itemFinishBinding.cardView.setOnClickListener{onItemClickCallback.onItemClicked(material)}

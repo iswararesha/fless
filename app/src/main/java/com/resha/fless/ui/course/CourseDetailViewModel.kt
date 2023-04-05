@@ -1,17 +1,15 @@
 package com.resha.fless.ui.course
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.resha.fless.model.*
-import java.text.SimpleDateFormat
-import java.util.*
+import com.resha.fless.model.Modul
+import com.resha.fless.model.SubModul
+import com.resha.fless.model.UserPreference
 
 class CourseDetailViewModel(private val pref: UserPreference) : ViewModel()  {
     private val _isLoading = MutableLiveData<Boolean>()
@@ -19,10 +17,6 @@ class CourseDetailViewModel(private val pref: UserPreference) : ViewModel()  {
 
     private val _modulData = MutableLiveData<List<Modul>>()
     val modulData : LiveData<List<Modul>> = _modulData
-
-    fun getUser(): LiveData<UserModel> {
-        return pref.getUser().asLiveData()
-    }
 
     fun getModul(courseParent: String){
         _isLoading.value = true

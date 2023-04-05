@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     app:layoutDescription="@xml/activity_onboarding_scene"
-    tools:context=".ui.onboarding.OnboardingActivity"
-    android:background="@color/white">
+    tools:context=".ui.onboarding.OnboardingActivity">
 
     <ImageView
         android:id="@+id/logoMenu1"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:text="@string/onboardingDescription2"
+        android:text="@string/onboardingDescription1"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu1"
@@ -149,10 +149,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
         android:text="@string/start_now"
+        android:textColor="@color/firstBlue"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/descMenu4"
         app:layout_constraintStart_toStartOf="@+id/descMenu4"
         app:layout_constraintTop_toBottomOf="@+id/descMenu4" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/next"
+        android:textColor="@color/firstBlue"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/skip"
+        android:textColor="@color/grey"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="286dp"
+        tools:layout_editor_absoluteY="22dp" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@color/grey"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="19dp" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu1"

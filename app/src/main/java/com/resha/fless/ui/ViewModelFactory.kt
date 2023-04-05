@@ -7,11 +7,14 @@ import com.resha.fless.evaluation.ObjectiveViewModel
 import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.course.CourseDetailViewModel
 import com.resha.fless.ui.course.CourseViewModel
+import com.resha.fless.ui.home.HomeViewModel
 import com.resha.fless.ui.login.LoginViewModel
 import com.resha.fless.ui.main.MainViewModel
 import com.resha.fless.ui.material.MaterialViewModel
+import com.resha.fless.ui.onboarding.OnboardingViewModel
 import com.resha.fless.ui.profile.ProfileViewModel
 import com.resha.fless.ui.register.RegisterViewModel
+import com.resha.fless.ui.splashscreen.SplashViewModel
 import com.resha.fless.ui.task.TaskViewModel
 
 class ViewModelFactory (private val userPref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
@@ -19,6 +22,12 @@ class ViewModelFactory (private val userPref: UserPreference) : ViewModelProvide
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+            modelClass.isAssignableFrom(SplashViewModel::class.java) -> {
+                SplashViewModel(userPref) as T
+            }
+            modelClass.isAssignableFrom(OnboardingViewModel::class.java) -> {
+                OnboardingViewModel(userPref) as T
+            }
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(userPref) as T
             }
@@ -48,6 +57,9 @@ class ViewModelFactory (private val userPref: UserPreference) : ViewModelProvide
             }
             modelClass.isAssignableFrom((TaskViewModel::class.java)) -> {
                 TaskViewModel(userPref) as T
+            }
+            modelClass.isAssignableFrom((HomeViewModel::class.java)) -> {
+                HomeViewModel(userPref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

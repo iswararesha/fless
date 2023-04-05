@@ -2,25 +2,19 @@ package com.resha.fless.ui.material
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resha.fless.databinding.FragmentMaterialBinding
 import com.resha.fless.model.Content
 import com.resha.fless.model.Material
-import com.resha.fless.model.SubModul
-import com.resha.fless.model.UserPreference
-import com.resha.fless.ui.ViewModelFactory
 
 private val Context.dataStore by preferencesDataStore("user")
 class MaterialFragment : Fragment() {
@@ -72,8 +66,22 @@ class MaterialFragment : Fragment() {
             val materialAdapter = MaterialAdapter(data)
             binding.rvMaterial.adapter = materialAdapter
 
+            materialAdapter.setOnItemClickCallback(object: MaterialAdapter.OnItemClickCallback{
+                override fun onItemClicked(string: String) {
+                    showImageDetail(string)
+                }
+            })
+
         }else{
             binding.rvMaterial.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun showImageDetail(string: String) {
+        if(string != null){
+            val intent = Intent(context, DetailImageActivity::class.java)
+            intent.putExtra(DetailImageActivity.IMAGE, string)
+            startActivity(intent)
         }
     }
 

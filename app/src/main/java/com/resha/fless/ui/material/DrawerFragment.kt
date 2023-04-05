@@ -2,21 +2,17 @@ package com.resha.fless.ui.material
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.resha.fless.R
 import com.resha.fless.databinding.FragmentDrawerBinding
-import com.resha.fless.databinding.FragmentMaterialBinding
-import com.resha.fless.model.Material
 import com.resha.fless.model.Modul
-import com.resha.fless.ui.course.ListModulAdapter
 
 private val Context.dataStore by preferencesDataStore("user")
 class DrawerFragment : Fragment() {

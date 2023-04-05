@@ -1,14 +1,370 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_home" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/imgBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_main_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="-160dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="-35dp"
+            android:background="@drawable/bg_home_rounded"
+            app:layout_constraintBottom_toBottomOf="@id/tvTaskDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgBackground"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="-25dp"
+            android:background="@drawable/bg_home_rounded"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvRecent" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="-25dp"
+            android:background="@drawable/bg_home_rounded"
+            app:layout_constraintBottom_toBottomOf="@id/tvSuggestion"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <View
+            android:id="@+id/graphBorder"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/graph_border"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/gvUserLog"
+            app:layout_constraintEnd_toEndOf="@+id/gvUserLog"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/gvUserLog"
+            app:layout_constraintTop_toTopOf="@+id/gvUserLog"
+            app:layout_constraintVertical_bias="1.0"
+            tools:visibility="visible" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/gvUserLog"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="70dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvGraphic"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvSuggestion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:text="@string/suggestion"
+            android:textAlignment="center"
+            android:textColor="@color/firstBlue"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@+id/tvTime"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imgEmpty"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="45dp"
+            android:src="@drawable/ic_asset_home_empty"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/tvSuggestion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvGreetUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="70dp"
+            android:text="@string/name"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/progressWeak"
+            android:textColor="@color/firstBlue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/tvTotalMaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/totalInt"
+            android:textAlignment="center"
+            android:textColor="@color/firstBlue"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvTotalEvaluation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProgress" />
+
+        <TextView
+            android:id="@+id/tvMaterialTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/materialTittle"
+            android:textColor="@color/firstBlue"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvTotalMaterial"
+            app:layout_constraintStart_toStartOf="@+id/tvTotalMaterial"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalMaterial" />
+
+
+        <TextView
+            android:id="@+id/tvTotalEvaluation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/totalInt"
+            android:textAlignment="center"
+            android:textColor="@color/firstYellow"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTotalMaterial"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTotalMaterial" />
+
+        <TextView
+            android:id="@+id/tvEvaluationTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evaluationTittle"
+            android:textColor="@color/firstYellow"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvTotalEvaluation"
+            app:layout_constraintStart_toStartOf="@+id/tvTotalEvaluation"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalEvaluation" />
+
+        <TextView
+            android:id="@+id/tvTotalTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
+            android:text="@string/totalInt"
+            android:textAlignment="center"
+            android:textColor="@color/firstGreen"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvEvaluationTittle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTotalEvaluation"
+            app:layout_constraintTop_toTopOf="@+id/tvTotalEvaluation" />
+
+        <TextView
+            android:id="@+id/tvTaskTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/taskHomeTittle"
+            android:textColor="@color/firstGreen"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvTotalTask"
+            app:layout_constraintStart_toStartOf="@+id/tvTotalTask"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalTask" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/time"
+            android:textColor="@color/firstYellow"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/graphBorder"
+            app:layout_constraintStart_toStartOf="@+id/graphBorder"
+            app:layout_constraintTop_toBottomOf="@+id/graphBorder" />
+
+        <TextView
+            android:id="@+id/tvProses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-5dp"
+            android:rotation="-90"
+            android:text="@string/process"
+            android:textColor="@color/firstYellow"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/graphBorder"
+            app:layout_constraintEnd_toStartOf="@+id/graphBorder"
+            app:layout_constraintTop_toTopOf="@+id/graphBorder" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/view3"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view3"
+            app:layout_constraintWidth_percent=".8"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/vMaterial"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/firstBlue"
+            app:layout_constraintStart_toStartOf="@+id/tvMaterialTittle"
+            app:layout_constraintTop_toBottomOf="@+id/tvMaterialTittle" />
+
+        <TextView
+            android:id="@+id/tvMaterialDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/homeMaterialDesc"
+            android:textColor="@color/firstBlue"
+            app:layout_constraintBottom_toBottomOf="@+id/vMaterial"
+            app:layout_constraintStart_toEndOf="@+id/vMaterial"
+            app:layout_constraintTop_toTopOf="@+id/vMaterial" />
+
+        <View
+            android:id="@+id/vEvaluation"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/firstYellow"
+            app:layout_constraintEnd_toEndOf="@+id/vMaterial"
+            app:layout_constraintStart_toStartOf="@+id/vMaterial"
+            app:layout_constraintTop_toBottomOf="@+id/vMaterial" />
+
+        <TextView
+            android:id="@+id/tvEvaluationDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/homeEvaluationDesc"
+            android:textColor="@color/firstYellow"
+            app:layout_constraintBottom_toBottomOf="@+id/vEvaluation"
+            app:layout_constraintStart_toEndOf="@+id/vEvaluation"
+            app:layout_constraintTop_toTopOf="@+id/vEvaluation" />
+
+        <View
+            android:id="@+id/vTask"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/firstGreen"
+            app:layout_constraintEnd_toEndOf="@+id/vEvaluation"
+            app:layout_constraintStart_toStartOf="@+id/vEvaluation"
+            app:layout_constraintTop_toBottomOf="@+id/vEvaluation" />
+
+        <TextView
+            android:id="@+id/tvTaskDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/homeTaskDesc"
+            android:textColor="@color/firstGreen"
+            app:layout_constraintBottom_toBottomOf="@+id/vTask"
+            app:layout_constraintStart_toEndOf="@+id/vTask"
+            app:layout_constraintTop_toTopOf="@+id/vTask" />
+
+        <TextView
+            android:id="@+id/tvGraphic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:text="@string/dayProgress"
+            android:textColor="@color/firstBlue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toTopOf="@+id/view3" />
+
+        <TextView
+            android:id="@+id/tvRecent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/recentMaterial"
+            android:textColor="@color/firstBlue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvGraphic"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvGraphic"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@+id/tvRecent"
+            tools:listitem="@layout/item_recent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

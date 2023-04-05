@@ -71,15 +71,15 @@ class TaskViewFragment : Fragment() {
     private fun setStatus(status: Boolean?) {
         if(status == true){
             binding.imgStatus.visibility = View.VISIBLE
+            binding.tvTaskStatus.visibility = View.VISIBLE
             binding.tvChosenFile.visibility = View.GONE
-            binding.chooseFileButton.visibility = View.GONE
             binding.uploadButton.visibility = View.GONE
 
             (activity as MaterialActivity).setButtonOn()
         }else{
             binding.imgStatus.visibility = View.INVISIBLE
+            binding.tvTaskStatus.visibility = View.INVISIBLE
             binding.tvChosenFile.visibility = View.VISIBLE
-            binding.chooseFileButton.visibility = View.VISIBLE
             binding.uploadButton.visibility = View.VISIBLE
         }
     }
@@ -92,13 +92,19 @@ class TaskViewFragment : Fragment() {
             val materialAdapter = MaterialAdapter(data)
             binding.rvMaterial.adapter = materialAdapter
 
+            materialAdapter.setOnItemClickCallback(object: MaterialAdapter.OnItemClickCallback{
+                override fun onItemClicked(string: String) {
+                    showImageDetail(string)
+                }
+            })
+
         }else{
             binding.rvMaterial.visibility = View.INVISIBLE
         }
     }
 
     private fun setupAction(){
-        binding.chooseFileButton.setOnClickListener(){
+        binding.tvChosenFile.setOnClickListener(){
             startDocument()
         }
 
@@ -114,6 +120,14 @@ class TaskViewFragment : Fragment() {
                     materialViewModel.uploadTask(material, getFile!!, getFileName!!)
                 }
             }
+        }
+    }
+
+    private fun showImageDetail(string: String) {
+        if(string != null){
+            val intent = Intent(context, DetailImageActivity::class.java)
+            intent.putExtra(DetailImageActivity.IMAGE, string)
+            startActivity(intent)
         }
     }
 

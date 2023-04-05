@@ -1,6 +1,5 @@
 package com.resha.fless.ui.material
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.net.Uri
@@ -10,7 +9,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.material.internal.ContextUtils.getActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -18,7 +16,6 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.resha.fless.model.*
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -67,7 +64,10 @@ class MaterialViewModel (private val userPref: UserPreference) : ViewModel() {
             _materialData.value?.modulParent
         )
 
-        updateLog(currentMaterial)
+        val type = _materialData.value?.type
+
+        updateProgress(currentMaterial)
+        newLog(currentMaterial, type.toString())
 
         val nextMaterial = Material(
             _materialData.value?.nextSubModulId,
@@ -102,7 +102,8 @@ class MaterialViewModel (private val userPref: UserPreference) : ViewModel() {
                         val itemList = Content(
                             documents.id,
                             documents.getString("content"),
-                            documents.getString("type")
+                            documents.getString("type"),
+                            documents.getString("class")
                         )
                         savedList.add(itemList)
                     }
@@ -155,7 +156,7 @@ class MaterialViewModel (private val userPref: UserPreference) : ViewModel() {
                     )
                     val type = snapshot.getString("type")
 
-                    newLog(newMaterial, type!!)
+                    newProgress(newMaterial, type!!)
 
                     _materialData.value = itemList
                     Log.d(TAG, "$source data: ${snapshot.data}")
@@ -220,7 +221,8 @@ class MaterialViewModel (private val userPref: UserPreference) : ViewModel() {
         uploadTask.addOnSuccessListener {
             storageRef.child(path).downloadUrl.addOnSuccessListener {
                 setTask(material, it.toString())
-                updateLog(material)
+                updateProgress(material)
+                newLog(material, "task")
 
                 Log.e("Firebase", "download passed link: $it")
             }.addOnFailureListener {
@@ -455,7 +457,7 @@ class MaterialViewModel (private val userPref: UserPreference) : ViewModel() {
         return subModul
     }
 
-    private fun updateLog(material: Material){
+    private fun updateProgress(material: Material){
         val userId = user.uid
 
         val updateData: MutableMap<String, Any> = mutableMapOf()
@@ -464,13 +466,13 @@ class MaterialViewModel (private val userPref: UserPreference) : ViewModel() {
 
         val queryLog = db.collection("user")
             .document(userId!!)
-            .collection("log")
+            .collection("progress")
             .document(material.courseParent!!+"-"+material.modulParent+"-"+material.subModulId)
 
         queryLog.get()
-            .addOnSuccessListener { logDocument ->
-                if (logDocument != null) {
-                    val isFinish = logDocument.getBoolean("isFinish")
+            .addOnSuccessListener { progress ->
+                if (progress != null) {
+                    val isFinish = progress.getBoolean("isFinish")
 
                     if (!isFinish!!) {
                         queryLog.set(updateData, SetOptions.merge())
@@ -482,7 +484,7 @@ class MaterialViewModel (private val userPref: UserPreference) : ViewModel() {
             }
     }
 
-    private fun newLog(material: Material, type: String){
+    private fun newProgress(material: Material, type: String){
         val userId = user.uid
 
         val newData: MutableMap<String, Any> = mutableMapOf()
@@ -495,17 +497,41 @@ class MaterialViewModel (private val userPref: UserPreference) : ViewModel() {
 
         val queryLog = db.collection("user")
             .document(userId!!)
-            .collection("log")
+            .collection("progress")
             .document(material.courseParent!!+"-"+material.modulParent+"-"+material.subModulId)
 
         queryLog.get()
-            .addOnSuccessListener { logDocument ->
-                if (!logDocument.exists()) {
+            .addOnSuccessListener { progress ->
+                if (!progress.exists()) {
                     queryLog.set(newData)
-                    Log.d("LOG","Create Log Success")
+                    Log.d("LOG","Create Progress Success")
                 }else{
                     Log.d("LOG","No Need New Log")
                 }
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }
+    }
+
+    private fun newLog(material: Material, type: String){
+        val userId = user.uid
+
+        val newData: MutableMap<String, Any> = mutableMapOf()
+        newData["date"] = FieldValue.serverTimestamp()
+        newData["subModulId"] = material.subModulId!!
+        newData["modulParent"] = material.modulParent!!
+        newData["courseParent"] = material.courseParent!!
+        newData["type"] = type
+
+        val queryLog = db.collection("user")
+            .document(userId!!)
+            .collection("log")
+
+        queryLog.get()
+            .addOnSuccessListener {
+                queryLog.add(newData)
+                Log.d("LOG","Create Log Success")
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)

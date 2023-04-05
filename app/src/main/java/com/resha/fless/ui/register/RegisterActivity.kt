@@ -3,6 +3,8 @@ package com.resha.fless.ui.register
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -11,6 +13,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import com.resha.fless.R
 import com.resha.fless.databinding.ActivityRegisterBinding
 import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.ViewModelFactory
@@ -48,15 +51,12 @@ class RegisterActivity : AppCompatActivity() {
         registerViewModel.isSuccess.observe(this) {
             if (it) {
                 Toast.makeText(this, "Selamat anda berhasil mendaftar", Toast.LENGTH_SHORT).show()
-            }
-        }
 
-        registerViewModel.getUser().observe(this) { user ->
-            if (user.isLogin) {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
+                Handler().postDelayed({
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish() } , 2000)
             }
         }
     }
@@ -94,22 +94,49 @@ class RegisterActivity : AppCompatActivity() {
     private fun checkValidation(name: EditText, email: EditText, password: EditText): Boolean {
         val isNameError : Boolean = name.length() == 0
         val isEmailError : Boolean = email.length() == 0
+        val isEmailFormatError : Boolean = !Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()
         val isPasswordError : Boolean = password.length() == 0
+        val isPasswordLengthError : Boolean = password.length() < 8 || password.length() > 16
 
-        if(isNameError || isEmailError || isPasswordError){
-            if(isNameError){
-                name.setError("Nama harus diisi")
+        if(isNameError){
+            name.error = "Nama harus diisi"
+            name.setBackgroundResource(R.drawable.error_border)
+
+            return false
+        }else{
+            name.setBackgroundResource(R.drawable.standard_border)
+        }
+
+        if(isEmailError || isEmailFormatError) {
+            if (isEmailError) {
+                email.error = "Email harus diisi"
+                email.setBackgroundResource(R.drawable.error_border)
             }
 
-            if(isEmailError){
-                email.setError("Email harus diisi")
-            }
-
-            if(isPasswordError){
-                password.setError("Password harus diisi")
+            if (isEmailFormatError) {
+                email.error = "Isi Email dengan benar"
+                email.setBackgroundResource(R.drawable.error_border)
             }
 
             return false
+        }else{
+            email.setBackgroundResource(R.drawable.standard_border)
+        }
+
+        if(isPasswordError || isPasswordLengthError) {
+            if(isPasswordError) {
+                password.error = "Password harus diisi"
+                password.setBackgroundResource(R.drawable.error_border)
+            }
+
+            if(isPasswordLengthError){
+                password.error = "Password minimal 8 dan maksimal 16 karakter"
+                password.setBackgroundResource(R.drawable.error_border)
+            }
+
+            return false
+        }else{
+            password.setBackgroundResource(R.drawable.standard_border)
         }
 
         return true

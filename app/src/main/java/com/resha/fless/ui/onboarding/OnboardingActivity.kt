@@ -2,21 +2,18 @@ package com.resha.fless.ui.onboarding
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.resha.fless.databinding.ActivityOnboardingBinding
-import com.resha.fless.model.AppPreference
-import com.resha.fless.ui.AppViewModelFactory
-import com.resha.fless.ui.main.MainActivity
+import com.resha.fless.model.UserPreference
+import com.resha.fless.ui.ViewModelFactory
+import com.resha.fless.ui.landing.LandingActivity
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var onboardingViewModel: OnboardingViewModel
     private lateinit var binding: ActivityOnboardingBinding
@@ -31,7 +28,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun setupViewModel() {
         onboardingViewModel = ViewModelProvider(this,
-            AppViewModelFactory(AppPreference.getInstance(dataStore))
+            ViewModelFactory(UserPreference.getInstance(dataStore))
         )[OnboardingViewModel::class.java]
 
         setupView()
@@ -42,9 +39,25 @@ class OnboardingActivity : AppCompatActivity() {
         binding.btnStart.setOnClickListener {
             onboardingViewModel.editStatus()
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LandingActivity::class.java)
             startActivity(intent)
             finish()
+        }
+
+        binding.btnSkip.setOnClickListener {
+            onboardingViewModel.editStatus()
+
+            val intent = Intent(this, LandingActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.btnNext.setOnClickListener {
+
+        }
+
+        binding.btnBack.setOnClickListener {
+
         }
     }
 

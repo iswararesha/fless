@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.resha.fless.R
 import com.resha.fless.databinding.ItemModulBinding
 import com.resha.fless.model.Modul
-import com.resha.fless.ui.course.ListSubModulAdapter
 
 class DrawerModulAdapter(private val listData : List<Modul>) : RecyclerView.Adapter<DrawerModulAdapter.ListViewHolder>(){
     lateinit var context: Context

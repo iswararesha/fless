@@ -42,6 +42,8 @@ class DrawerSubModulAdapter(private var listData : List<SubModul>) :
                     }
                 }
             }else{
+                tvSubModulName.setCompoundDrawables(null, null, null, null)
+                tvSubModulName.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(context, R.drawable.ic_baseline_lock_24), null)
                 tvSubModulName.setTextColor(ContextCompat.getColor(context, R.color.firstYellow))
                 tvSubModulName.text= listData[position].name
             }

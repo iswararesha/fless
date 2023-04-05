@@ -7,13 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.resha.fless.R
 import com.resha.fless.model.Attempt
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class EvaluationAdapter (private val listData : List<Attempt>) :
     RecyclerView.Adapter<EvaluationAdapter.ListViewHolder>() {

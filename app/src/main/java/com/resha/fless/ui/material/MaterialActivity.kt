@@ -12,7 +12,9 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.resha.fless.R
 import com.resha.fless.databinding.ActivityMaterialBinding
-import com.resha.fless.model.*
+import com.resha.fless.model.Material
+import com.resha.fless.model.SubModul
+import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 
 
@@ -46,6 +48,8 @@ class MaterialActivity : AppCompatActivity() {
 
         materialViewModel.materialData.observe(this){
             setFragment(it)
+
+            title = it.name
         }
 
         materialViewModel.getSubModul(material)
@@ -119,13 +123,13 @@ class MaterialActivity : AppCompatActivity() {
     private fun setButtonOff(){
         binding.nextButton.isEnabled = false
         binding.nextButton.isClickable = false
-        binding.nextButton.setBackgroundColor(ContextCompat.getColor(this, R.color.firstYellow))
+        binding.nextButton.setTextColor(ContextCompat.getColor(this, R.color.grey))
     }
 
     fun setButtonOn(){
         binding.nextButton.isEnabled = true
         binding.nextButton.isClickable = true
-        binding.nextButton.setBackgroundColor(ContextCompat.getColor(this, R.color.firstBlue))
+        binding.nextButton.setTextColor(ContextCompat.getColor(this, R.color.firstBlue))
     }
 
     fun getNewMaterial(material: Material){

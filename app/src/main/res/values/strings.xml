@@ -1,36 +1,62 @@
 <resources>
     <string name="app_name">Fless</string>
-    <string name="onboarding_title_test">Test Title</string>
-    <string name="onboarding_desceription_test">Test Description</string>
     <string name="start_now">Mulai</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="landingText">Lets Get Started!</string>
-    <string name="haveAccount">Already have an account?</string>
+    <string name="noHaveAccount">Belum punya akun?</string>
+    <string name="haveAccount">Sudah punya akun?</string>
     <string name="forgotPassword">Lupa Password</string>
     <string name="sendVerification">Verifikasi</string>
 
+    //Home
+    <string name="totalInt">00</string>
+    <string name="suggestion">Saran untuk pengguna</string>
+    <string name="progressWeak">Kegiatan kamu hari ini:</string>
+    <string name="materialTittle">Materi</string>
+    <string name="evaluationTittle">Evaluasi</string>
+    <string name="taskHomeTittle">Tugas</string>
+    <string name="homeMaterialDesc">Materi yang kamu pelajari</string>
+    <string name="homeEvaluationDesc">Latihan yang kamu selesaikan</string>
+    <string name="homeTaskDesc">Tugas yang kamu kerjakan</string>
+    <string name="time">Waktu</string>
+    <string name="process">Kegiatan</string>
+    <string name="dayProgress">Kegiatan 3 Hari Terakhir:</string>
+    <string name="recentMaterial">Materi yang terakhir dilihat</string>
+
+
+    //Course
+    <string name="courseGreeting">Hi, Mau Belajar Apa Hari Ini?</string>
+    <string name="searchEmpty">Ga nemu…</string>
+
+    //Task
+    <string name="taskTittle">TUGAS</string>
+    <string name="taskEmpty">Sepertinya masih kosong…</string>
+
     //Register and Login
-    <string name="helloAgain">Hello Again!</string>
-    <string name="welcomeLogin">Welcome back!</string>
-    <string name="descriptionWelcome">"You've been missed"</string>
-    <string name="registerInstruction">Please fill this form to continue</string>
-    <string name="createAccount">Create Your Account</string>
+    <string name="helloAgain">Halo Teman!</string>
+    <string name="welcomeLogin">Selamat datang!</string>
+    <string name="descriptionWelcome">"Senang bisa bertemu kembali."</string>
+    <string name="registerInstruction">Terima kasih sudah menjadi bagian dari Fless.</string>
+    <string name="createAccount">Selamat bergabung!</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="name">Nama</string>
-    <string name="landingTextDescription">Please select one option of authentication below.
-        We are happy to fless together with you</string>
+    <string name="landingTextDescription">Silahkan pilih opsi autentikasi berikut.
+        \nKami senang terbang bersamamu.</string>
+    <string name="passwordForgot">Lupa Password?</string>
+    <string name="passwordFeature">Jangan khawatir, gunakan fitur berikut.</string>
 
     /Onboarding Title and Description
-    <string name="onboardingTittle1">Learn Annywhere and Anytime</string>
-    <string name="onboardingDescription1">"With Fless, you can access your learning material and task anywhere and anytime. But don't forget the internet connection!"</string>
-    <string name="onboardingTittle2">Enjoy the Material and Video</string>
-    <string name="onboardingDescription2">Enjoy our self-directed learning designed learning material with video to support your understanding.</string>
-    <string name="onboardingTittle3">Personalization For Your Need</string>
-    <string name="onboardingDescription3">Use our personalization feature to make your study more comfortable.</string>
+    <string name="onboardingTittle1">Belajar dimana saja, kapan saja!</string>
+    <string name="onboardingDescription1">"Dengen Fless, kamu bisa mengakses materi dan tugas perkuliahan dimana saja dan kapan saja. Tapi jangan lupakan koneksi internet ya!"</string>
+    <string name="onboardingTittle2">Nikmati materi dan video kami</string>
+    <string name="onboardingDescription2">Nikmati materi pembelajran yang kami desain dengan bermuatan metode belajar self-directed learning dan video untuk membantu pemahamanmu.</string>
+    <string name="onboardingTittle3">Personalisasi sesuai kenyamananmu!</string>
+    <string name="onboardingDescription3">Gunakan fitur personalisasi kami, untuk membuat prosese belajarmu menjadi lebih nyaman.</string>
     <string name="onboardingTittle4">Fless Now</string>
-    <string name="onboardingDescription4">Welcome, we are happy to Fless with you!</string>
+    <string name="onboardingDescription4">Selamat datang, \nKami senang terbang bersamamu!</string>
+    <string name="skip">Skip</string>
 
     //Navigation
     <string name="title_home">Home</string>
@@ -39,15 +65,28 @@
     <string name="title_profile">Profile</string>
 
     //Profile
-    <string name="logout">Logout</string>
+    <string name="logout">Keluar</string>
+    <string name="contectDev">Hubungi Developer</string>
+    <string name="changePassword">Ganti Password</string>
+    <string name="credit">Credit</string>
+    <string name="appVersion">Fless versi 1.0.0</string>
+    <string name="setting">Pengaturan</string>
+    <string name="darkMode">Ganti Ke Mode Gelap</string>
+    <string name="lightMode">Ganti Ke Mode Terang</string>
+    <string name="oldPassword">Password Lama</string>
+    <string name="newPassword">Password Baru</string>
+    <string name="newPasswordValidation">Konfirmasi Password Baru</string>
+    <string name="btnConfirmation">Konfirmasi</string>
 
     //Course Item
     <string name="courseName">Course Name</string>
     <string name="courseDescription">Course Description</string>
     <string name="totalMaterial">Total Material</string>
     <string name="next">Next</string>
-    <string name="previous">previous</string>
+    <string name="previous">prev</string>
     <string name="attempt">Ambil Ujian</string>
+    <string name="practiceDesctiption">Kerjakan latihan ini sebelum dapat melanjutkan ke materi berikutnya. Untuk dapat melanjutkan ke materi berikutnya, kamu harus mencapai skor 100 minimal 1 kali.</string>
+    <string name="testDesctiption">Kerjakan latihan ini sebelum dapat melanjutkan ke materi berikutnya. Untuk dapat melanjutkan ke materi berikutnya, kamu harus mencapai skor 80 minimal 1 kali.</string>
 
     //Evaluation
     <string name="dateAttempt">Tanggal Uji Coba</string>

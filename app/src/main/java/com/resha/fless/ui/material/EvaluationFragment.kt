@@ -2,31 +2,24 @@ package com.resha.fless.ui.material
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
+import android.graphics.text.LineBreaker
+import android.os.Build
 import android.os.Bundle
-import android.system.Os.remove
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resha.fless.R
-import com.resha.fless.model.Material
-import com.resha.fless.model.UserPreference
-import com.resha.fless.ui.ViewModelFactory
 import com.resha.fless.databinding.FragmentEvaluationBinding
 import com.resha.fless.evaluation.EssayActivity
 import com.resha.fless.evaluation.ObjectiveActivity
 import com.resha.fless.model.Attempt
-import com.resha.fless.model.Course
-import com.resha.fless.ui.course.ListCourseAdapter
+import com.resha.fless.model.Material
 
 private val Context.dataStore by preferencesDataStore("user")
 class EvaluationFragment : Fragment() {
@@ -56,6 +49,10 @@ class EvaluationFragment : Fragment() {
             showLoading(it)
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            binding.tvDesciptionEvaluation.justificationMode = LineBreaker.JUSTIFICATION_MODE_INTER_WORD
+        }
+
         materialViewModel.materialData.observe(viewLifecycleOwner){
             val material = Material(
                 it.subModulId,
@@ -64,6 +61,13 @@ class EvaluationFragment : Fragment() {
             )
 
             materialViewModel.getUserAttempt(material)
+
+            binding.tvTittleEvaluation.text = it.name
+            if(it.type == "test"){
+                binding.tvDesciptionEvaluation.text = (getString(R.string.testDesctiption))
+            }else{
+                binding.tvDesciptionEvaluation.text = (getString(R.string.practiceDesctiption))
+            }
         }
 
         materialViewModel.attemptData.observe(viewLifecycleOwner){

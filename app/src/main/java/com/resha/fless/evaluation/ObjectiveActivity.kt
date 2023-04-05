@@ -1,23 +1,21 @@
 package com.resha.fless.evaluation
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resha.fless.databinding.ActivityObjectiveBinding
-import com.resha.fless.model.*
+import com.resha.fless.model.Answer
+import com.resha.fless.model.Material
+import com.resha.fless.model.Objective
+import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.ViewModelFactory
-import com.resha.fless.ui.material.MaterialActivity
+import java.util.Collections.shuffle
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 class ObjectiveActivity : AppCompatActivity() {
@@ -63,12 +61,16 @@ class ObjectiveActivity : AppCompatActivity() {
             binding.rvListObjective.visibility = View.VISIBLE
             binding.rvListObjective.layoutManager = LinearLayoutManager(this)
 
+            shuffle(data)
+
             val listObjectiveAdapter = ListObjectiveAdapter(data)
             binding.rvListObjective.adapter = listObjectiveAdapter
 
             val getAnswer = ArrayList<Answer>()
-            for (id in 1 .. data.size){
-                getAnswer.add(Answer("number$id", "answer"))
+
+            for (id in data){
+                val numberId = id.objectiveId?.toInt()
+                getAnswer.add(Answer("number$numberId", "answer"))
             }
 
             listObjectiveAdapter.setOnButtonChange(object: ListObjectiveAdapter.OnButtonCallback{

@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.register.RegisterActivity">
 
+
+
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
@@ -24,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:text="@string/haveAccount"
+        android:text="@string/noHaveAccount"
         app:layout_constraintEnd_toEndOf="@+id/btnLogin"
         app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="@+id/btnLogin"
@@ -45,7 +47,7 @@
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="35dp"
         android:text="@string/email"
         android:textColor="@color/firstBlue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,20 +70,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:width="300dp"
+        android:background="@drawable/standard_border"
         android:ems="10"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawableTint="@color/firstYellow"
+        android:drawablePadding="10dp"
+        android:hint="example@example.com"
         android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="@+id/tvEmail"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-        android:width="300dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:width="300dp"
+        android:background="@drawable/standard_border"
         android:ems="10"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:drawableTint="@color/firstYellow"
+        android:drawablePadding="10dp"
+        android:hint="Kata Sandi"
         android:inputType="textPassword"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:minHeight="48dp"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleDrawable="@drawable/ic_baseline_remove_red_eye_24"
+        app:passwordToggleTint="@color/grey"
+        app:endIconDrawable="@drawable/ic_baseline_visibility_off_24"
+        app:endIconTint="@color/firstYellow"
         app:layout_constraintStart_toStartOf="@+id/tvPassword"
         app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
 
@@ -89,13 +112,12 @@
         android:id="@+id/tvHelloAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:text="@string/helloAgain"
         android:textColor="@color/firstBlue"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imgLogoIcon"
-        app:layout_constraintStart_toStartOf="@+id/imgLogoIcon"
+        app:layout_constraintStart_toStartOf="@+id/tvEmail"
         app:layout_constraintTop_toBottomOf="@+id/imgLogoIcon" />
 
     <TextView
@@ -104,7 +126,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/welcomeLogin"
-        app:layout_constraintEnd_toEndOf="@+id/tvHelloAgain"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/editEmail"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvHelloAgain"
         app:layout_constraintTop_toBottomOf="@+id/tvHelloAgain" />
 
@@ -114,20 +138,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/descriptionWelcome"
-        app:layout_constraintEnd_toEndOf="@+id/tvInstruction"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/editEmail"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvInstruction"
         app:layout_constraintTop_toBottomOf="@+id/tvInstruction" />
 
     <ImageView
         android:id="@+id/imgLogoIcon"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_icon_logo"
-        app:tint="@color/firstBlue"/>
+        app:srcCompat="@drawable/ic_asset_login" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/forgotPassword"
+        android:textColor="@color/firstBlue"
+        app:layout_constraintEnd_toEndOf="@+id/editPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loading"
@@ -141,15 +176,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".8"
         app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/loading"
-        app:lottie_loop="true" />
-
-    <TextView
-        android:id="@+id/tvForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/forgotPassword"
-        app:layout_constraintEnd_toEndOf="@+id/editPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
 </androidx.constraintlayout.widget.ConstraintLayout>

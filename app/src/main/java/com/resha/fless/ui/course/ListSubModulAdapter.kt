@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.resha.fless.R
 import com.resha.fless.databinding.ItemSubModulBinding
 import com.resha.fless.model.Material
-import com.resha.fless.model.Modul
 import com.resha.fless.model.SubModul
 import com.resha.fless.ui.material.MaterialActivity
+
 
 class ListSubModulAdapter(private var listData : List<SubModul>) :
     RecyclerView.Adapter<ListSubModulAdapter.ListViewHolder>(){
@@ -31,22 +31,17 @@ class ListSubModulAdapter(private var listData : List<SubModul>) :
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.binding.apply {
-            if(listData[position].isOpen!!){
-                tvSubModulName.text= listData[position].name
-                cardView.setOnClickListener{
-                    val nextMaterial = Material(
-                        listData[position].subModulId,
-                        listData[position].courseParent,
-                        listData[position].modulParent
-                    )
+            tvSubModulName.text= listData[position].name
+            cardView.setOnClickListener{
+                val nextMaterial = Material(
+                    listData[position].subModulId,
+                    listData[position].courseParent,
+                    listData[position].modulParent
+                )
 
-                    val intent = Intent(context, MaterialActivity::class.java)
-                    intent.putExtra(MaterialActivity.MATERIAL_DETAIL, nextMaterial)
-                    context.startActivity(intent)
-                }
-            }else{
-                tvSubModulName.setTextColor(ContextCompat.getColor(context, R.color.firstYellow))
-                tvSubModulName.text= listData[position].name
+                val intent = Intent(context, MaterialActivity::class.java)
+                intent.putExtra(MaterialActivity.MATERIAL_DETAIL, nextMaterial)
+                context.startActivity(intent)
             }
         }
     }

@@ -5,12 +5,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.resha.fless.model.Attempt
-import com.resha.fless.model.Course
-import com.resha.fless.model.TaskModel
+import com.resha.fless.model.Progress
 import com.resha.fless.model.UserPreference
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,8 +16,8 @@ class TaskViewModel (private val userPref: UserPreference) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _taskData = MutableLiveData<List<TaskModel>>()
-    val taskData: LiveData<List<TaskModel>> = _taskData
+    private val _taskData = MutableLiveData<List<Progress>>()
+    val taskData: LiveData<List<Progress>> = _taskData
 
     private val user = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
@@ -29,7 +26,7 @@ class TaskViewModel (private val userPref: UserPreference) : ViewModel() {
         val userId = user.uid
 
         val queryLog = db.collection("user").document(userId!!)
-            .collection("log").whereEqualTo("isFinish", false).whereEqualTo("type", "task")
+            .collection("progress").whereEqualTo("isFinish", false).whereEqualTo("type", "task")
 
         queryLog.addSnapshotListener {
                     snapshot, e ->
@@ -44,7 +41,7 @@ class TaskViewModel (private val userPref: UserPreference) : ViewModel() {
                     "Server"
 
                 if (snapshot != null) {
-                    var savedList : MutableList<TaskModel> = mutableListOf()
+                    var savedList : MutableList<Progress> = mutableListOf()
                     _taskData.value = savedList
                     for (documents in snapshot.documents) {
                         val dateOpen = documents.getTimestamp("dateOpen")?.toDate()?.let {
@@ -52,7 +49,7 @@ class TaskViewModel (private val userPref: UserPreference) : ViewModel() {
                                 it)
                         }
 
-                        val itemList = TaskModel(
+                        val itemList = Progress(
                             documents.id,
                             documents.getString("subModulId"),
                             documents.getString("modulParent"),
@@ -76,7 +73,7 @@ class TaskViewModel (private val userPref: UserPreference) : ViewModel() {
         val userId = user.uid
 
         val queryLog = db.collection("user").document(userId!!)
-            .collection("log").whereEqualTo("isFinish", true).whereEqualTo("type", "task")
+            .collection("progress").whereEqualTo("isFinish", true).whereEqualTo("type", "task")
 
         queryLog.addSnapshotListener {
                 snapshot, e ->
@@ -91,7 +88,7 @@ class TaskViewModel (private val userPref: UserPreference) : ViewModel() {
                 "Server"
 
             if (snapshot != null) {
-                var savedList : MutableList<TaskModel> = mutableListOf()
+                var savedList : MutableList<Progress> = mutableListOf()
                 _taskData.value = savedList
                 for (documents in snapshot.documents) {
                     val dateOpen = documents.getTimestamp("dateOpen")?.toDate()?.let {
@@ -103,7 +100,7 @@ class TaskViewModel (private val userPref: UserPreference) : ViewModel() {
                         SimpleDateFormat("dd MMMM yyyy - hh:mm a", Locale("id", "ID")).format(
                             it)
                     }
-                    val itemList = TaskModel(
+                    val itemList = Progress(
                         documents.id,
                         documents.getString("subModulId"),
                         documents.getString("modulParent"),

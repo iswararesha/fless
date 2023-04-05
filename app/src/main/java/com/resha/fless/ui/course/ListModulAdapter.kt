@@ -1,17 +1,11 @@
 package com.resha.fless.ui.course
 
-import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.resha.fless.R
 import com.resha.fless.databinding.ItemModulBinding
 import com.resha.fless.model.Modul

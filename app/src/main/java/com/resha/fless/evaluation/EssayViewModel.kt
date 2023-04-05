@@ -5,12 +5,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.resha.fless.model.*
+import com.resha.fless.model.Answer
+import com.resha.fless.model.Essay
+import com.resha.fless.model.Material
+import com.resha.fless.model.UserPreference
 
 class EssayViewModel (private val pref: UserPreference) : ViewModel()  {
     private val _isLoading = MutableLiveData<Boolean>()
@@ -18,10 +20,6 @@ class EssayViewModel (private val pref: UserPreference) : ViewModel()  {
 
     private val _essayData = MutableLiveData<Essay>()
     val essayData : LiveData<Essay> = _essayData
-
-    fun getUser(): LiveData<UserModel> {
-        return pref.getUser().asLiveData()
-    }
 
     fun getEssay(material: Material){
         _isLoading.value = true

@@ -5,12 +5,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.resha.fless.model.Answer
 import com.resha.fless.model.Course
-import com.resha.fless.model.UserModel
 import com.resha.fless.model.UserPreference
 
 
@@ -23,10 +20,6 @@ class CourseViewModel (private val userPref: UserPreference) : ViewModel() {
 
     private val user = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
-
-    fun getUser(): LiveData<UserModel> {
-        return userPref.getUser().asLiveData()
-    }
 
     fun searchCourse(key: String){
         _courseData
@@ -62,7 +55,9 @@ class CourseViewModel (private val userPref: UserPreference) : ViewModel() {
                                         documents.getString("courseDescription"),
                                         documents.getString("courseName"),
                                         documents.getLong("totalMaterial")?.toInt(),
-                                        true
+                                        true,
+                                        documents.getString("courseImg"),
+                                        documents.getString("videoLink")
                                     )
 
                                     Log.d("Course", itemList.courseId!!)
@@ -92,7 +87,9 @@ class CourseViewModel (private val userPref: UserPreference) : ViewModel() {
                                         documents.getString("courseDescription"),
                                         documents.getString("courseName"),
                                         documents.getLong("totalMaterial")?.toInt(),
-                                        false
+                                        false,
+                                        documents.getString("courseImg"),
+                                        documents.getString("videoLink")
                                     )
                                     Log.d("Course", itemList.courseId!!)
                                     savedList.add(itemList)
@@ -141,7 +138,9 @@ class CourseViewModel (private val userPref: UserPreference) : ViewModel() {
                                         documents.getString("courseDescription"),
                                         documents.getString("courseName"),
                                         documents.getLong("totalMaterial")?.toInt(),
-                                        true
+                                        true,
+                                        documents.getString("courseImg"),
+                                        documents.getString("videoLink")
                                     )
 
                                     Log.d("Course", itemList.courseId!!)
@@ -171,7 +170,9 @@ class CourseViewModel (private val userPref: UserPreference) : ViewModel() {
                                         documents.getString("courseDescription"),
                                         documents.getString("courseName"),
                                         documents.getLong("totalMaterial")?.toInt(),
-                                        false
+                                        false,
+                                        documents.getString("courseImg"),
+                                        documents.getString("videoLink")
                                     )
                                     Log.d("Course", itemList.courseId!!)
                                     savedList.add(itemList)

@@ -3,13 +3,16 @@ package com.resha.fless.ui.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import com.resha.fless.R
 import com.resha.fless.databinding.ActivityForgotPasswordBinding
 import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.ViewModelFactory
@@ -25,19 +28,26 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupView()
         setupViewModel()
         setupAction()
     }
 
     private fun setupAction(){
         binding.btnVerification.setOnClickListener(){
-            val email = binding.editEmail.text.toString()
-
-            loginViewModel.forgotPassword(email, this)
+            actionLogin()
         }
 
         binding.tvBackLogin.setOnClickListener(){
             finish()
+        }
+    }
+
+    private fun actionLogin() {
+        val email = binding.editEmail
+
+        if(checkValidation(email)){
+            loginViewModel.forgotPassword(email.text.toString(), this)
         }
     }
 
@@ -53,15 +63,29 @@ class ForgotPasswordActivity : AppCompatActivity() {
         loginViewModel.errorMessage.observe(this) { message ->
             Toast.makeText(this, message.toString(), Toast.LENGTH_SHORT).show()
         }
+    }
 
-        loginViewModel.getUser().observe(this) { user ->
-            if (user.isLogin) {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
+    private fun checkValidation(email: EditText): Boolean {
+        val isEmailError : Boolean = email.length() == 0
+        val isEmailFormatError : Boolean = !Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()
+
+        if(isEmailError || isEmailFormatError){
+            if(isEmailError){
+                email.error = "Email harus diisi"
+                email.setBackgroundResource(R.drawable.error_border)
             }
+
+            if(isEmailFormatError) {
+                email.error = "Isi Email dengan benar"
+                email.setBackgroundResource(R.drawable.error_border)
+            }
+
+            return false
+        }else{
+            email.setBackgroundResource(R.drawable.standard_border)
         }
+
+        return true
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -70,5 +94,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
         }else{
             binding.loading.visibility = View.GONE
         }
+    }
+
+    private fun setupView() {
+        supportActionBar?.hide()
     }
 }

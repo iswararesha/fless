@@ -2,20 +2,17 @@ package com.resha.fless.ui.course
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.core.view.contains
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resha.fless.databinding.FragmentCourseBinding
 import com.resha.fless.model.Course
@@ -50,6 +47,10 @@ class CourseFragment : Fragment() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                binding.rvListCourse.visibility = View.INVISIBLE
+                binding.imgEmpty.visibility = View.INVISIBLE
+                binding.tvEmpty.visibility = View.INVISIBLE
+
                 if(query == ""){
                     courseViewModel.getCourse()
                 }
@@ -60,6 +61,10 @@ class CourseFragment : Fragment() {
                 return false
             }
             override fun onQueryTextChange(newText: String): Boolean {
+                binding.rvListCourse.visibility = View.INVISIBLE
+                binding.imgEmpty.visibility = View.INVISIBLE
+                binding.tvEmpty.visibility = View.INVISIBLE
+
                 if(newText == ""){
                     courseViewModel.getCourse()
                 }
@@ -91,6 +96,9 @@ class CourseFragment : Fragment() {
     private fun setCourseData(data: List<Course>){
         if(data.isNotEmpty()){
             binding.rvListCourse.visibility = View.VISIBLE
+            binding.imgEmpty.visibility = View.INVISIBLE
+            binding.tvEmpty.visibility = View.INVISIBLE
+
             binding.rvListCourse.layoutManager = LinearLayoutManager(context)
 
             val listCourseAdapter = ListCourseAdapter(data)
@@ -107,6 +115,8 @@ class CourseFragment : Fragment() {
             })
         }else{
             binding.rvListCourse.visibility = View.INVISIBLE
+            binding.imgEmpty.visibility = View.VISIBLE
+            binding.tvEmpty.visibility = View.VISIBLE
         }
     }
 
@@ -126,6 +136,15 @@ class CourseFragment : Fragment() {
             binding.loading.visibility = View.VISIBLE
         }else{
             binding.loading.visibility = View.GONE
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        courseViewModel.courseData.removeObservers(this)
+
+        courseViewModel.courseData.observe(viewLifecycleOwner) {
+            setCourseData(it)
         }
     }
 }

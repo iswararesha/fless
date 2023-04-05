@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -16,12 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.resha.fless.databinding.FragmentTaskBinding
-import com.resha.fless.model.*
+import com.resha.fless.model.Progress
+import com.resha.fless.model.Material
+import com.resha.fless.model.UserPreference
 import com.resha.fless.ui.ViewModelFactory
-import com.resha.fless.ui.course.CourseDetailActivity
-import com.resha.fless.ui.course.ListCourseAdapter
-import com.resha.fless.ui.material.MaterialActivity
-import com.resha.fless.ui.material.MaterialAdapter
 
 
 private val Context.dataStore by preferencesDataStore("user")
@@ -82,9 +79,11 @@ class TaskFragment : Fragment() {
         })
     }
 
-    private fun setTaskData(data: List<TaskModel>){
+    private fun setTaskData(data: List<Progress>){
         if(data.isNotEmpty()){
             binding.rvListTask.visibility = View.VISIBLE
+            binding.clStatus.visibility = View.INVISIBLE
+
             binding.rvListTask.layoutManager = LinearLayoutManager(context)
 
             val listTaskAdapter = ListTaskAdapter(data)
@@ -97,12 +96,13 @@ class TaskFragment : Fragment() {
             })
         }else{
             binding.rvListTask.visibility = View.INVISIBLE
+            binding.clStatus.visibility = View.VISIBLE
         }
     }
 
     private fun showSelectedTask(material: Material) {
-        val intent = Intent(context, MaterialActivity::class.java)
-        intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
+        val intent = Intent(context, TaskTempActivity::class.java)
+        intent.putExtra(TaskTempActivity.MATERIAL_DETAIL, material)
         startActivity(intent)
     }
 
@@ -119,9 +119,13 @@ class TaskFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        taskViewModel.taskData.removeObservers(this)
+    }
+
     override fun onResume() {
         super.onResume()
-        taskViewModel.taskData.removeObservers(this)
 
         val tab = binding.tabTask.getTabAt(0)
         binding.tabTask.selectTab(tab)
