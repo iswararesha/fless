@@ -16,8 +16,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resha.fless.R
 import com.resha.fless.databinding.FragmentEvaluationBinding
-import com.resha.fless.evaluation.EssayActivity
-import com.resha.fless.evaluation.ObjectiveActivity
+import com.resha.fless.ui.evaluation.EssayActivity
+import com.resha.fless.ui.evaluation.ObjectiveActivity
 import com.resha.fless.model.Attempt
 import com.resha.fless.model.Material
 
@@ -101,12 +101,6 @@ class EvaluationFragment : Fragment() {
 
     private fun setUserAttempt(data: List<Attempt>){
         if(data.isNotEmpty()){
-            for(id in data){
-                if(id.score!!.toFloat() > 80){
-                    (activity as MaterialActivity).setButtonOn()
-                }
-            }
-
             binding.rvAttempt.visibility = View.VISIBLE
             binding.rvAttempt.layoutManager = LinearLayoutManager(context)
 

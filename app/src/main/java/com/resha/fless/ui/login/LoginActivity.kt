@@ -13,14 +13,12 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.resha.fless.R
 import com.resha.fless.databinding.ActivityLoginBinding
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 import com.resha.fless.ui.main.MainActivity
 import com.resha.fless.ui.register.RegisterActivity
-import kotlinx.coroutines.launch
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 class LoginActivity : AppCompatActivity() {

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".evaluation.EssayActivity">
+    tools:context=".ui.evaluation.EssayActivity">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/svEssay"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -38,7 +38,9 @@
                     android:id="@+id/imgProgram"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +68,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="15dp"
                 android:minHeight="550dp"
+                android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_field" />
 
 
@@ -80,14 +83,16 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:minWidth="125dp"
-                    android:text="@string/next"
+                    android:text="SELESAI"
+                    android:textColor="@color/white"
+                    android:backgroundTint="?attr/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loading"

@@ -35,18 +35,18 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCourseObjective"
                     tools:listitem="@layout/item_modul" />
 
                 <ImageView
                     android:id="@+id/frameVideo"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-60dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_main_background" />
+                    tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
                     android:id="@+id/tvCourseName"
@@ -86,16 +86,30 @@
                     app:layout_constraintStart_toStartOf="@+id/tvCourseName"
                     app:layout_constraintTop_toBottomOf="@+id/tvCourseName" />
 
-                <VideoView
-                    android:id="@+id/vvCourseIntro"
+                <TextView
+                    android:id="@+id/tvCourseObjective"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/courseDescription"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvCourseId"
+                    app:layout_constraintStart_toStartOf="@+id/tvCourseName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription" />
+
+                <ImageView
+                    android:id="@+id/btnPlay"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginBottom="60dp"
+                    android:alpha="0.7"
                     app:layout_constraintBottom_toBottomOf="@+id/frameVideo"
                     app:layout_constraintEnd_toEndOf="@+id/frameVideo"
                     app:layout_constraintStart_toStartOf="@+id/frameVideo"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
+                    app:layout_constraintTop_toTopOf="@+id/frameVideo"
+                    app:srcCompat="@drawable/ic_baseline_play_circle_24"
+                    app:tint="@color/blackSurface" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

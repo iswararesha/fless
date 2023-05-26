@@ -4,15 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.resha.fless.R
-import com.resha.fless.model.Course
 import com.resha.fless.model.Material
 import com.resha.fless.model.Recent
-import com.resha.fless.ui.course.ListCourseAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 

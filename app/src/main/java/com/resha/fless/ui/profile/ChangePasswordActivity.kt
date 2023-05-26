@@ -11,7 +11,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.resha.fless.R
 import com.resha.fless.databinding.ActivityChangePasswordBinding
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 
 

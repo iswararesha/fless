@@ -2,9 +2,9 @@ package com.resha.fless.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.resha.fless.evaluation.EssayViewModel
-import com.resha.fless.evaluation.ObjectiveViewModel
-import com.resha.fless.model.UserPreference
+import com.resha.fless.ui.evaluation.EssayViewModel
+import com.resha.fless.ui.evaluation.ObjectiveViewModel
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.course.CourseDetailViewModel
 import com.resha.fless.ui.course.CourseViewModel
 import com.resha.fless.ui.home.HomeViewModel

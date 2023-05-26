@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.resha.fless.databinding.FragmentTaskBinding
-import com.resha.fless.model.Progress
 import com.resha.fless.model.Material
-import com.resha.fless.model.UserPreference
+import com.resha.fless.model.Task
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 
 
@@ -79,7 +79,7 @@ class TaskFragment : Fragment() {
         })
     }
 
-    private fun setTaskData(data: List<Progress>){
+    private fun setTaskData(data: List<Task>){
         if(data.isNotEmpty()){
             binding.rvListTask.visibility = View.VISIBLE
             binding.clStatus.visibility = View.INVISIBLE

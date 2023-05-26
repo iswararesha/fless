@@ -1,6 +1,7 @@
 package com.resha.fless.model
 
 import android.os.Parcelable
+import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -14,5 +15,8 @@ data class SubModul(
     val prevModulParent: String? = null,
     val nextSubModulId: String? = null,
     val nextModulParent: String? = null,
-    val isOpen: Boolean? = false
+    val dateOpen: Timestamp? = null,
+    val deadLine: Timestamp? = null,
+    val isFinish: Boolean? = false,
+    val finishDate: Timestamp? = null
 ) : Parcelable

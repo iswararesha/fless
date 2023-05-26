@@ -30,10 +30,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
-        app:labelVisibilityMode="unlabeled"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:theme="@style/ThemeOverlay.AppCompat.navTheme"
         app:menu="@menu/bottom_nav_menu" />
 
     <View
@@ -48,6 +49,4 @@
         app:layout_constraintEnd_toEndOf="@+id/nav_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/nav_view" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

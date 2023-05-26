@@ -15,7 +15,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/firstBlue">
+            android:background="?attr/colorPrimary">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,8 +32,8 @@
             android:id="@+id/tabTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            app:tabTextColor="@android:color/white"
+            android:background="@color/firstBlue"
+            app:tabTextColor="@color/white"
             app:tabBackground="@drawable/tab_color_selector"
             app:tabIndicatorColor="@color/firstYellow"/>
 

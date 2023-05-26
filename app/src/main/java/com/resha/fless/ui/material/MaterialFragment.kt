@@ -70,6 +70,10 @@ class MaterialFragment : Fragment() {
                 override fun onItemClicked(string: String) {
                     showImageDetail(string)
                 }
+
+                override fun onVideoClicked(string: String) {
+                    showVideoDetail(string)
+                }
             })
 
         }else{
@@ -81,6 +85,14 @@ class MaterialFragment : Fragment() {
         if(string != null){
             val intent = Intent(context, DetailImageActivity::class.java)
             intent.putExtra(DetailImageActivity.IMAGE, string)
+            startActivity(intent)
+        }
+    }
+
+    private fun showVideoDetail(string: String) {
+        if(string != null){
+            val intent = Intent(context, VideoActivity::class.java)
+            intent.putExtra(VideoActivity.VIDEO, string)
             startActivity(intent)
         }
     }

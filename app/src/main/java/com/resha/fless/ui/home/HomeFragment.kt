@@ -13,7 +13,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jjoe64.graphview.GridLabelRenderer
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
@@ -21,12 +20,10 @@ import com.resha.fless.R
 import com.resha.fless.databinding.FragmentHomeBinding
 import com.resha.fless.model.Material
 import com.resha.fless.model.Recent
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
-import com.resha.fless.ui.task.ListTaskAdapter
-import com.resha.fless.ui.task.TaskTempActivity
+import com.resha.fless.ui.material.MaterialActivity
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.*
@@ -49,6 +46,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         setupViewModel()
+        setupAction()
 
         return root
     }
@@ -104,6 +102,13 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun setupAction(){
+        binding.btnTutorial.setOnClickListener{
+            val intent = Intent(context, TutorialActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     private fun setView(data: List<Recent>){
         binding.gvUserLog.visibility = View.INVISIBLE
         binding.tvSuggestion.visibility = View.INVISIBLE
@@ -146,8 +151,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun showSelectedRecent(material: Material) {
-        val intent = Intent(context, TaskTempActivity::class.java)
-        intent.putExtra(TaskTempActivity.MATERIAL_DETAIL, material)
+        val intent = Intent(context, MaterialActivity::class.java)
+        intent.putExtra(MaterialActivity.MATERIAL_DETAIL, material)
         startActivity(intent)
     }
 
@@ -159,15 +164,15 @@ class HomeFragment : Fragment() {
         val today: LocalDate = LocalDate.now(z)
         val startOfToday: ZonedDateTime = today.atStartOfDay(z)
 
-        val d = startOfToday.minusDays(3)
+        val dStart = startOfToday.minusDays(2)
 
-        val date = Date.from(d.toInstant())
+        val dateStart = Date.from(dStart.toInstant())
+        val dateEnd = Date.from(startOfToday.toInstant())
 
-        val points = arrayOfNulls<DataPoint>(data.size+1)
-        points[0] = DataPoint(date, 0.0)
+        val points = arrayOfNulls<DataPoint>(data.size)
 
         for (i in data.size downTo 1) {
-            points[i] = DataPoint(data[i-1].x, data[i-1].y)
+            points[i-1] = DataPoint(data[i-1].x, data[i-1].y)
         }
 
         val series = LineGraphSeries(points)
@@ -175,16 +180,16 @@ class HomeFragment : Fragment() {
         series.color = ContextCompat.getColor(activity?.applicationContext!!, R.color.firstYellow)
 
         lineGraphView.gridLabelRenderer.labelFormatter =  DateAsXAxisLabelFormatter(lineGraphView.context)
-        lineGraphView.gridLabelRenderer.numHorizontalLabels = 4
+        lineGraphView.gridLabelRenderer.numHorizontalLabels = 3
 
         // set manual x bounds to have nice steps
 
-        lineGraphView.viewport.setMinX(date.time.toDouble())
-        lineGraphView.viewport.setMaxX(points[data.size]!!.x)
+        lineGraphView.viewport.setMinX(dateStart.time.toDouble())
+        lineGraphView.viewport.setMaxX(dateEnd.time.toDouble())
         lineGraphView.viewport.isXAxisBoundsManual = true
 
         lineGraphView.viewport.setMinY(0.0)
-        lineGraphView.viewport.setMaxY(16.0)
+        lineGraphView.viewport.setMaxY(20.0)
         lineGraphView.viewport.isYAxisBoundsManual = true
 
         // as we use dates as labels, the human rounding to nice readable numbers
@@ -208,45 +213,8 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        homeViewModel.recent.removeObservers(this)
-        homeViewModel.suggestionData.removeObservers(this)
-        homeViewModel.pointData.removeObservers(this)
-        homeViewModel.totalMaterialData.removeObservers(this)
-        homeViewModel.totalEvaluationData.removeObservers(this)
-        homeViewModel.totalTaskData.removeObservers(this)
-        homeViewModel.recentData.removeObservers(this)
 
-        homeViewModel.recent.observe(viewLifecycleOwner) {
-            homeViewModel.getSuggestion(it)
-            homeViewModel.getPoint(it)
-            homeViewModel.getTotal(it)
-            setView(it)
-        }
-
-        homeViewModel.suggestionData.observe(viewLifecycleOwner){
-            binding.tvSuggestion.text = it
-        }
-
-        homeViewModel.pointData.observe(viewLifecycleOwner){
-            setGraph(it)
-        }
-
-        homeViewModel.totalMaterialData.observe(viewLifecycleOwner){
-            binding.tvTotalMaterial.text = it.toString()
-        }
-
-        homeViewModel.totalEvaluationData.observe(viewLifecycleOwner){
-            binding.tvTotalEvaluation.text = it.toString()
-        }
-
-        homeViewModel.totalTaskData.observe(viewLifecycleOwner){
-            binding.tvTotalTask.text = it.toString()
-        }
-
+        homeViewModel.getGraph()
         homeViewModel.getRecent()
-
-        homeViewModel.recentData.observe(viewLifecycleOwner){
-            setRecent(it)
-        }
     }
 }

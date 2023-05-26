@@ -5,7 +5,7 @@
     android:viewportHeight="288">
   <path
       android:pathData="M0,0h504v288h-504z"
-      android:fillColor="#219ebc"/>
+      android:fillColor="?attr/colorPrimary"/>
   <group>
     <clip-path
         android:pathData="M0,0h504v288h-504z"/>

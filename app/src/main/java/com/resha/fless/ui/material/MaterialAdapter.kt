@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.resha.fless.databinding.ItemGifBinding
 import com.resha.fless.databinding.ItemImgBinding
 import com.resha.fless.databinding.ItemTextBinding
+import com.resha.fless.databinding.ItemVideoBinding
 import com.resha.fless.model.Content
 import com.resha.fless.ui.material.Const.gifType
 import com.resha.fless.ui.material.Const.imgType
@@ -28,6 +29,7 @@ class MaterialAdapter (private val listData : List<Content>) :
 
     interface OnItemClickCallback {
         fun onItemClicked(string: String)
+        fun onVideoClicked(string: String)
     }
 
     inner class TextMaterialViewHolder(private val itemTextBinding: ItemTextBinding) :
@@ -69,12 +71,24 @@ class MaterialAdapter (private val listData : List<Content>) :
         }
     }
 
+    inner class VideoMaterialViewHolder(private val itemVideoBinding: ItemVideoBinding) :
+        RecyclerView.ViewHolder(itemVideoBinding.root) {
+        fun bind(content: Content) {
+            Glide.with(context)
+                .load(content.thumbnail)
+                .into(itemVideoBinding.tvContent)
+
+            itemVideoBinding.tvContent.setOnClickListener {onItemClickCallback.onVideoClicked(content.content!!)}
+        }
+    }
+
      override fun getItemViewType (position: Int): Int {
         return when (listData[position].type) {
             "text" -> txtType
             "img" -> imgType
             "gif" -> gifType
-            else ->  videoType
+            "video" -> videoType
+            else ->  txtType
         }
     }
 
@@ -97,6 +111,11 @@ class MaterialAdapter (private val listData : List<Content>) :
                     ItemGifBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 GifMaterialViewHolder(view)
             }
+            videoType -> {
+                val view =
+                    ItemVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                VideoMaterialViewHolder(view)
+            }
             else -> {
                 val view =
                     ItemTextBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -112,6 +131,8 @@ class MaterialAdapter (private val listData : List<Content>) :
             (holder as ImgMaterialViewHolder).bind(listData[position])
         } else if (getItemViewType (position) == gifType) {
             (holder as GifMaterialViewHolder).bind(listData[position])
+        } else if (getItemViewType (position) == videoType) {
+            (holder as VideoMaterialViewHolder).bind(listData[position])
         } else {
             (holder as TextMaterialViewHolder).bind(listData[position])
         }

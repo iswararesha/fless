@@ -9,7 +9,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.resha.fless.databinding.ActivityOnboardingBinding
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 import com.resha.fless.ui.landing.LandingActivity
 
@@ -50,14 +50,6 @@ class OnboardingActivity : AppCompatActivity() {
             val intent = Intent(this, LandingActivity::class.java)
             startActivity(intent)
             finish()
-        }
-
-        binding.btnNext.setOnClickListener {
-
-        }
-
-        binding.btnBack.setOnClickListener {
-
         }
     }
 

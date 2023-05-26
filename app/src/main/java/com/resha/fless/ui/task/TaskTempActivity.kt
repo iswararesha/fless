@@ -3,18 +3,19 @@ package com.resha.fless.ui.task
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resha.fless.databinding.ActivityTaskTempBinding
 import com.resha.fless.model.Content
 import com.resha.fless.model.Material
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 import com.resha.fless.ui.material.*
 
@@ -63,6 +64,7 @@ class TaskTempActivity : AppCompatActivity() {
 
             materialViewModel.getContent(material)
             materialViewModel.getUserTask(material)
+            materialViewModel.getUserTaskComment(material)
         }
 
         materialViewModel.contentData.observe(this) {
@@ -72,17 +74,31 @@ class TaskTempActivity : AppCompatActivity() {
         materialViewModel.taskStatus.observe(this) {
             setStatus(it)
         }
+
+        materialViewModel.taskComment.observe(this) {
+            binding.tvComment.text = it
+        }
     }
 
     private fun setStatus(status: Boolean?) {
-        if (status == true) {
+        if(status == true){
             binding.imgStatus.visibility = View.VISIBLE
             binding.tvTaskStatus.visibility = View.VISIBLE
+
+            binding.tvCommentPage.visibility = View.VISIBLE
+            binding.tvCommentTitle.visibility = View.VISIBLE
+            binding.tvComment.visibility = View.VISIBLE
+
             binding.tvChosenFile.visibility = View.GONE
             binding.uploadButton.visibility = View.GONE
-        } else {
+        }else{
             binding.imgStatus.visibility = View.INVISIBLE
             binding.tvTaskStatus.visibility = View.INVISIBLE
+
+            binding.tvCommentPage.visibility = View.GONE
+            binding.tvCommentTitle.visibility = View.INVISIBLE
+            binding.tvComment.visibility = View.INVISIBLE
+
             binding.tvChosenFile.visibility = View.VISIBLE
             binding.uploadButton.visibility = View.VISIBLE
         }
@@ -101,6 +117,10 @@ class TaskTempActivity : AppCompatActivity() {
                 override fun onItemClicked(string: String) {
                     showImageDetail(string)
                 }
+
+                override fun onVideoClicked(string: String) {
+                    showVideoDetail(string)
+                }
             })
 
         } else {
@@ -114,16 +134,10 @@ class TaskTempActivity : AppCompatActivity() {
         }
 
         binding.uploadButton.setOnClickListener() {
-            materialViewModel.materialData.observe(this) {
-                val material = Material(
-                    it.subModulId,
-                    it.courseParent,
-                    it.modulParent
-                )
-
-                if (getFile != null) {
-                    materialViewModel.uploadTask(material, getFile!!, getFileName!!)
-                }
+            if (getFile != null) {
+                materialViewModel.uploadTask(getFile!!, getFileName!!)
+            } else {
+                Toast.makeText(this, "Pilih file terlebih dahulu!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -132,6 +146,14 @@ class TaskTempActivity : AppCompatActivity() {
         if (string != null) {
             val intent = Intent(this, DetailImageActivity::class.java)
             intent.putExtra(DetailImageActivity.IMAGE, string)
+            startActivity(intent)
+        }
+    }
+
+    private fun showVideoDetail(string: String) {
+        if(string != null){
+            val intent = Intent(this, VideoActivity::class.java)
+            intent.putExtra(VideoActivity.VIDEO, string)
             startActivity(intent)
         }
     }

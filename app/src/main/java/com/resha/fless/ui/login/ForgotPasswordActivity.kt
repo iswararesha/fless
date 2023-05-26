@@ -1,7 +1,6 @@
 package com.resha.fless.ui.login
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
@@ -14,9 +13,8 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.resha.fless.R
 import com.resha.fless.databinding.ActivityForgotPasswordBinding
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
-import com.resha.fless.ui.main.MainActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 class ForgotPasswordActivity : AppCompatActivity() {

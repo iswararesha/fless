@@ -9,7 +9,7 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.resha.fless.model.User
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import kotlinx.coroutines.launch
 
 class ProfileViewModel (private val userPref: UserPreference) : ViewModel()  {

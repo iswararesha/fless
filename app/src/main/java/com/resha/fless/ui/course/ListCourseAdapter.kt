@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.resha.fless.R
@@ -26,6 +27,7 @@ class ListCourseAdapter(private val listData : List<Course>) :RecyclerView.Adapt
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvCourseName: TextView = itemView.findViewById(R.id.tvCourseName)
         var tvTotalMaterial: TextView = itemView.findViewById(R.id.tvTotalMaterial)
+        var tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
         var imgCourse: ImageView = itemView.findViewById(R.id.imgCourse)
     }
 
@@ -39,9 +41,18 @@ class ListCourseAdapter(private val listData : List<Course>) :RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val (_, _, courseName, totalMaterial, _, courseImg) = listData[position]
+        val (_, _, _, courseName, totalMaterial, isOpen, courseImg) = listData[position]
         holder.tvCourseName.text = courseName
-        holder.tvTotalMaterial.text = totalMaterial.toString() + " Material"
+        holder.tvTotalMaterial.text = totalMaterial.toString() + " Hari Pelajaran"
+
+        if(isOpen!!){
+            holder.tvStatus.text = "Terdaftar"
+            holder.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.firstGreen))
+        }else{
+            holder.tvStatus.text = "Belum Dibuka"
+            holder.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.firstYellow))
+        }
+
         Glide.with(context)
             .load(courseImg)
             .into(holder.imgCourse)

@@ -6,7 +6,9 @@
     <color name="firstYellow">#ffb703</color>
     <color name="secondYellow">#fb8500</color>
     <color name="firstGreen">#469906</color>
-    <color name="black">#FF000000</color>
+    <color name="firstRed">#cf1919</color>
+    <color name="black">#FF000000</color>>
+    <color name="blackSurface">#222222</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#DCDCDC</color>
     <color name="darkGrey">#808080</color>

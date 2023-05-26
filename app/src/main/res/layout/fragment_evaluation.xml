@@ -38,6 +38,8 @@
             android:layout_marginTop="15dp"
             android:minWidth="125dp"
             android:text="@string/attempt"
+            android:textColor="@color/white"
+            android:backgroundTint="?attr/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/rvAttempt"
             app:layout_constraintTop_toBottomOf="@+id/bottom_card_view" />
@@ -49,7 +51,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:padding="5dp"
-            app:cardBackgroundColor="@color/firstBlue"
+            app:cardBackgroundColor="?attr/colorPrimary"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -110,11 +112,12 @@
             android:layout_height="10sp"
             android:layout_gravity="center"
             android:padding="5dp"
-            app:cardBackgroundColor="@color/firstBlue"
+            app:cardBackgroundColor="?attr/colorPrimary"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvAttempt"></androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toBottomOf="@+id/rvAttempt">
+        </androidx.cardview.widget.CardView>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"

@@ -11,10 +11,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.jjoe64.graphview.series.DataPoint
-import com.resha.fless.model.Course
 import com.resha.fless.model.Recent
 import com.resha.fless.model.User
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -278,46 +277,41 @@ class HomeViewModel (private val userPref: UserPreference) : ViewModel() {
         val userId = user.uid
 
         val queryLog = db.collection("user").document(userId!!)
-            .collection("log").orderBy("date", Query.Direction.DESCENDING).limit(3)
+            .collection("recent").orderBy("date", Query.Direction.DESCENDING).limit(3)
 
         queryLog.get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    var emptyList: MutableList<Recent> = mutableListOf()
-                    _recent.value = emptyList
-                    for (documents in snapshot.documents) {
-                        db.collection("course")
-                            .document(documents.getString("courseParent")!!)
-                            .collection("learningMaterial")
-                            .document(documents.getString("modulParent")!!)
-                            .collection("subLearningMaterial")
-                            .document(documents.getString("subModulId")!!)
-                            .get()
-                            .addOnSuccessListener { subModul ->
-                                val itemList = Recent(
-                                    documents.id,
-                                    subModul.getString("name"),
-                                    documents.getString("subModulId"),
-                                    documents.getString("modulParent"),
-                                    documents.getString("courseParent"),
-                                    documents.getTimestamp("date"),
-                                    documents.getString("type")
-                                )
-                                savedList.add(itemList)
-                                Log.d("DATE", itemList.recentId.toString())
+            .addOnSuccessListener { result ->
+                var emptyList: MutableList<Recent> = mutableListOf()
+                _recent.value = emptyList
+                for (documents in result) {
+                    db.collection("course")
+                        .document(documents.getString("courseParent")!!)
+                        .collection("learningMaterial")
+                        .document(documents.getString("modulParent")!!)
+                        .collection("subLearningMaterial")
+                        .document(documents.getString("subModulId")!!)
+                        .get()
+                        .addOnSuccessListener { subModul ->
+                            val itemList = Recent(
+                                documents.id,
+                                subModul.getString("name"),
+                                documents.getString("subModulId"),
+                                documents.getString("modulParent"),
+                                documents.getString("courseParent"),
+                                documents.getTimestamp("date"),
+                                documents.getString("type")
+                            )
+                            savedList.add(itemList)
+                            Log.d("DATE", itemList.recentId.toString())
 
-                                _recentData.value = savedList
-                            }.addOnFailureListener { exception ->
-                                Log.w(TAG, "Error getting documents.", exception)
-                            }
-
-                    }
+                            _recentData.value = savedList
+                        }.addOnFailureListener { exception ->
+                            Log.w(TAG, "Error getting documents.", exception)
+                        }
                 }
             }.addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
+                Log.d(TAG, "Error getting documents: ", exception)
             }
-
-
         _isLoading.value = false
     }
 }

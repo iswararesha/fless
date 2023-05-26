@@ -13,6 +13,7 @@
         android:layout_marginTop="57dp"
         android:width="300dp"
         android:text="@string/register"
+        android:backgroundTint="@color/firstBlue"
         app:layout_constraintEnd_toEndOf="@+id/editPassword"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/editPassword"
@@ -22,13 +23,13 @@
         android:id="@+id/tvHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:text="@string/haveAccount"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLogin"
         app:layout_constraintEnd_toEndOf="@+id/btnRegister"
         app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="@+id/btnRegister"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+        app:layout_constraintTop_toTopOf="@+id/tvLogin" />
 
     <TextView
         android:id="@+id/tvLogin"
@@ -36,10 +37,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/login"
         android:textColor="@color/firstBlue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvHaveAccount"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvEmail"

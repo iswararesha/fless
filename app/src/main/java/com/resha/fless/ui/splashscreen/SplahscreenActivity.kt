@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -13,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.resha.fless.R
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 import com.resha.fless.ui.landing.LandingActivity
 import com.resha.fless.ui.main.MainActivity
@@ -39,6 +40,14 @@ class SplahscreenActivity : AppCompatActivity() {
         splashViewModel = ViewModelProvider(this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[SplashViewModel::class.java]
+
+        splashViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         splashViewModel.getStatus().observe(this) { firstOpenStatus ->
             if (firstOpenStatus) {

@@ -1,13 +1,13 @@
 package com.resha.fless.ui.register
 
-import android.os.Handler
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
-import com.resha.fless.model.UserPreference
-import kotlinx.coroutines.launch
+import com.resha.fless.preference.UserPreference
 
 
 class RegisterViewModel(private val userPref: UserPreference) : ViewModel() {

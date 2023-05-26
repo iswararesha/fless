@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -15,10 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.resha.fless.R
 import com.resha.fless.databinding.FragmentProfileBinding
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 import com.resha.fless.ui.landing.LandingActivity
-import com.resha.fless.ui.main.MainActivity
 
 private val Context.dataStore by preferencesDataStore("user")
 class ProfileFragment : Fragment() {
@@ -89,10 +87,8 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.getThemeSettings().observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 binding.btnDarkMode.text = getString(R.string.lightMode)
             } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 binding.btnDarkMode.text = getString(R.string.darkMode)
             }
         }

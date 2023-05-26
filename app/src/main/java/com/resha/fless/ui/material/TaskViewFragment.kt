@@ -8,6 +8,7 @@ import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
@@ -57,6 +58,7 @@ class TaskViewFragment : Fragment() {
 
             materialViewModel.getContent(material)
             materialViewModel.getUserTask(material)
+            materialViewModel.getUserTaskComment(material)
         }
 
         materialViewModel.contentData.observe(viewLifecycleOwner) {
@@ -66,19 +68,31 @@ class TaskViewFragment : Fragment() {
         materialViewModel.taskStatus.observe(viewLifecycleOwner) {
             setStatus(it)
         }
+
+        materialViewModel.taskComment.observe(this) {
+            binding.tvComment.text = it
+        }
     }
 
     private fun setStatus(status: Boolean?) {
         if(status == true){
             binding.imgStatus.visibility = View.VISIBLE
             binding.tvTaskStatus.visibility = View.VISIBLE
+
+            binding.tvCommentPage.visibility = View.VISIBLE
+            binding.tvCommentTitle.visibility = View.VISIBLE
+            binding.tvComment.visibility = View.VISIBLE
+
             binding.tvChosenFile.visibility = View.GONE
             binding.uploadButton.visibility = View.GONE
-
-            (activity as MaterialActivity).setButtonOn()
         }else{
             binding.imgStatus.visibility = View.INVISIBLE
             binding.tvTaskStatus.visibility = View.INVISIBLE
+
+            binding.tvCommentPage.visibility = View.GONE
+            binding.tvCommentTitle.visibility = View.INVISIBLE
+            binding.tvComment.visibility = View.INVISIBLE
+
             binding.tvChosenFile.visibility = View.VISIBLE
             binding.uploadButton.visibility = View.VISIBLE
         }
@@ -96,6 +110,10 @@ class TaskViewFragment : Fragment() {
                 override fun onItemClicked(string: String) {
                     showImageDetail(string)
                 }
+
+                override fun onVideoClicked(string: String) {
+                    showVideoDetail(string)
+                }
             })
 
         }else{
@@ -109,16 +127,10 @@ class TaskViewFragment : Fragment() {
         }
 
         binding.uploadButton.setOnClickListener(){
-            materialViewModel.materialData.observe(viewLifecycleOwner) {
-                val material = Material(
-                    it.subModulId,
-                    it.courseParent,
-                    it.modulParent
-                )
-
-                if (getFile != null) {
-                    materialViewModel.uploadTask(material, getFile!!, getFileName!!)
-                }
+            if (getFile != null) {
+                materialViewModel.uploadTask(getFile!!, getFileName!!)
+            } else {
+                Toast.makeText(context, "Pilih file terlebih dahulu!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -127,6 +139,14 @@ class TaskViewFragment : Fragment() {
         if(string != null){
             val intent = Intent(context, DetailImageActivity::class.java)
             intent.putExtra(DetailImageActivity.IMAGE, string)
+            startActivity(intent)
+        }
+    }
+
+    private fun showVideoDetail(string: String) {
+        if(string != null){
+            val intent = Intent(context, VideoActivity::class.java)
+            intent.putExtra(VideoActivity.VIDEO, string)
             startActivity(intent)
         }
     }

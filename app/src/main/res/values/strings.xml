@@ -22,7 +22,7 @@
     <string name="time">Waktu</string>
     <string name="process">Kegiatan</string>
     <string name="dayProgress">Kegiatan 3 Hari Terakhir:</string>
-    <string name="recentMaterial">Materi yang terakhir dilihat</string>
+    <string name="recentMaterial">Terakhir dilihat</string>
 
 
     //Course
@@ -58,18 +58,28 @@
     <string name="onboardingDescription4">Selamat datang, \nKami senang terbang bersamamu!</string>
     <string name="skip">Skip</string>
 
+    /Onboarding Title and Description
+    <string name="tutorialTittle1">Activity Counter</string>
+    <string name="tutorialDescription1">Gunakan fitur ini untuk melihat sebarapa banyak kegiatan pembelajaran yang kamu lakukan pada hari ini.</string>
+    <string name="tutorialTittle2">Learning Graph</string>
+    <string name="tutorialDescription2">Grafik pada halaman utama ini akan menunjukkan penurunan atau peningkatan kegiatan pembelajaranmu dalam 3 hari terakhir.</string>
+    <string name="tutorialTittle3">Halaman Materi</string>
+    <string name="tutorialDescription3">Tekan tombol "Materi" untuk menuju materi dan pelajari materi dari mata kuliah yang kamu inginkan.</string>
+    <string name="tutorialTittle4">Halaman Tugas</string>
+    <string name="tutorialDescription4">Lihat tugas yang sedang aktif ataupun selesai melalui halaman tugas dengan menekan tombol "Tugas".</string>
+
     //Navigation
-    <string name="title_home">Home</string>
-    <string name="title_course">Course</string>
-    <string name="title_task">Task</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_course">Materi</string>
+    <string name="title_task">Tugas</string>
+    <string name="title_profile">Akun</string>
 
     //Profile
     <string name="logout">Keluar</string>
     <string name="contectDev">Hubungi Developer</string>
     <string name="changePassword">Ganti Password</string>
     <string name="credit">Credit</string>
-    <string name="appVersion">Fless versi 1.0.0</string>
+    <string name="appVersion">Fless versi 1.0.1</string>
     <string name="setting">Pengaturan</string>
     <string name="darkMode">Ganti Ke Mode Gelap</string>
     <string name="lightMode">Ganti Ke Mode Terang</string>
@@ -97,6 +107,7 @@
     <string name="uploadButton">Kirim File</string>
     <string name="directory">Pilih file yang ingin anda kirim.</string>
     <string name="status">Kamu sudah menyelesaikan tugas ini.</string>
+    <string name="komenPenilai">Komentar dari penilai</string>
 
     //Material
     <string name="material">Material</string>

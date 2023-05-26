@@ -10,11 +10,12 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.Timestamp
 import com.resha.fless.R
 import com.resha.fless.databinding.ActivityMaterialBinding
 import com.resha.fless.model.Material
 import com.resha.fless.model.SubModul
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 
 
@@ -84,7 +85,7 @@ class MaterialActivity : AppCompatActivity() {
     private fun setFragment(subModul: SubModul){
         when (subModul.type) {
             "material" -> {
-                setButtonOn()
+                materialViewModel.newRecent("material")
 
                 val fragmentManager = supportFragmentManager
                 val materialFragment = MaterialFragment()
@@ -96,18 +97,22 @@ class MaterialActivity : AppCompatActivity() {
 
             }
             "task" -> {
-                setButtonOff()
+                if(subModul.dateOpen?.toDate()!! > Timestamp.now().toDate()){
+                    finish()
+                }else{
+                    materialViewModel.newRecent("task")
 
-                val fragmentManager = supportFragmentManager
-                val taskViewFragment = TaskViewFragment()
+                    val fragmentManager = supportFragmentManager
+                    val taskViewFragment = TaskViewFragment()
 
-                fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.material_view_fragment, taskViewFragment, TaskViewFragment::class.java.simpleName)
-                    .commit()
+                    fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.material_view_fragment, taskViewFragment, TaskViewFragment::class.java.simpleName)
+                        .commit()
+                }
             }
             else -> {
-                setButtonOff()
+                materialViewModel.newRecent("evaluation")
 
                 val fragmentManager = supportFragmentManager
                 val evaluationFragment = EvaluationFragment()

@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resha.fless.databinding.FragmentCourseBinding
 import com.resha.fless.model.Course
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 
 private val Context.dataStore by preferencesDataStore("user")
@@ -136,15 +136,6 @@ class CourseFragment : Fragment() {
             binding.loading.visibility = View.VISIBLE
         }else{
             binding.loading.visibility = View.GONE
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        courseViewModel.courseData.removeObservers(this)
-
-        courseViewModel.courseData.observe(viewLifecycleOwner) {
-            setCourseData(it)
         }
     }
 }

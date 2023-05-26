@@ -15,7 +15,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.resha.fless.R
 import com.resha.fless.databinding.ActivityRegisterBinding
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
 import com.resha.fless.ui.login.LoginActivity
 import com.resha.fless.ui.main.MainActivity
@@ -50,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel.isSuccess.observe(this) {
             if (it) {
-                Toast.makeText(this, "Selamat anda berhasil mendaftar", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Selamat datang teman!", Toast.LENGTH_SHORT).show()
 
                 Handler().postDelayed({
                     val intent = Intent(this, MainActivity::class.java)

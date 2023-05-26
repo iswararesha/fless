@@ -1,23 +1,25 @@
 package com.resha.fless.ui.course
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.text.LineBreaker
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.MediaController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.resha.fless.databinding.ActivityCourseDetailBinding
 import com.resha.fless.model.Course
 import com.resha.fless.model.Modul
-import com.resha.fless.model.UserPreference
+import com.resha.fless.preference.UserPreference
 import com.resha.fless.ui.ViewModelFactory
+import com.resha.fless.ui.material.VideoActivity
+import com.resha.fless.ui.material.VideoActivity.Companion.VIDEO
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")
 class CourseDetailActivity : AppCompatActivity() {
@@ -38,6 +40,7 @@ class CourseDetailActivity : AppCompatActivity() {
 
         setupView()
         setupViewModel()
+        setupAction()
     }
 
     private fun setupViewModel() {
@@ -62,22 +65,28 @@ class CourseDetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+    private fun setupAction(){
+        binding.btnPlay.setOnClickListener {
+            val intent = Intent(this, VideoActivity::class.java)
+            intent.putExtra(VIDEO, course.videoLink)
+            startActivity(intent)
+        }
+    }
+
     private fun setModulData(data: List<Modul>){
         if(data.isNotEmpty()){
             binding.tvCourseName.text = course.courseName
             binding.tvCourseId.text = course.courseId
             binding.tvCourseDescription.text = course.courseDescription
+            binding.tvCourseObjective.text = course.courseObjective
 
-            val uri = Uri.parse(course.videoLink)
-            binding.vvCourseIntro.setVideoURI(uri)
-
-            val mediaController = MediaController(this)
-            mediaController.setAnchorView(binding.vvCourseIntro)
-            mediaController.setMediaPlayer(binding.vvCourseIntro)
-            binding.vvCourseIntro.setMediaController(mediaController)
+            Glide.with(this)
+                .load(course.thumbnail)
+                .into(binding.frameVideo)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 binding.tvCourseDescription.justificationMode = LineBreaker.JUSTIFICATION_MODE_INTER_WORD
+                binding.tvCourseObjective.justificationMode = LineBreaker.JUSTIFICATION_MODE_INTER_WORD
             }
 
             binding.rvListModul.visibility = View.VISIBLE
@@ -106,6 +115,8 @@ class CourseDetailActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        courseDetailViewModel.getModul(course.courseId.toString())
+
         courseDetailViewModel.modulData.observe(this) {
             setModulData(it)
         }

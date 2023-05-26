@@ -15,10 +15,10 @@
             android:id="@+id/imgBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-10dp"
-            android:scaleType="fitXY"
+            android:layout_marginTop="-50dp"
             android:src="@drawable/ic_main_background"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="-160dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="-35dp"
             android:background="@drawable/bg_home_rounded"
@@ -35,21 +35,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgBackground"
+            app:layout_constraintTop_toBottomOf="@+id/tvGreetUser"
             app:layout_constraintVertical_bias="0.0" />
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="-25dp"
-            android:background="@drawable/bg_home_rounded"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvRecent" />
 
         <View
             android:id="@+id/view3"
@@ -62,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="@+id/view"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view"/>
 
         <View
             android:id="@+id/graphBorder"
@@ -124,11 +111,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/name"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/btnTutorial"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -344,16 +334,16 @@
 
         <TextView
             android:id="@+id/tvRecent"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/recentMaterial"
             android:textColor="@color/firstBlue"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/tvGraphic"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tvGraphic"
+            app:layout_constraintStart_toStartOf="@+id/view3"
             app:layout_constraintTop_toBottomOf="@+id/view3" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -365,6 +355,17 @@
             app:layout_constraintStart_toStartOf="@+id/view3"
             app:layout_constraintTop_toBottomOf="@+id/tvRecent"
             tools:listitem="@layout/item_recent"/>
+
+        <ImageView
+            android:id="@+id/btnTutorial"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/ic_baseline_help_center_24"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGreetUser"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvGreetUser"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
